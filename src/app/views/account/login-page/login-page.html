@@ -1,1 +1,151 @@
-<p>login-page works!</p>
+<div class="login-layout container-fluid p-0">
+    <div class="row g-0 h-100">
+
+        <!-- ==============================
+             LEFT: LOGIN FORM
+        =============================== -->
+        <div class="col-lg-6 d-flex flex-column bg-white position-relative left-panel">
+
+            <!-- Decorative background -->
+            <div class="position-absolute w-100 h-100 overflow-hidden decorative-bg">
+                <div class="bg-shape top-left"></div>
+                <div class="bg-shape bottom-left"></div>
+                <div class="bg-shape right-shape"></div>
+
+                <div class="concentric-circles">
+                    <div class="circle circle-1"></div>
+                    <div class="circle circle-2"></div>
+                    <div class="circle circle-3"></div>
+                </div>
+
+                <div class="concentric-circles-bottom">
+                    <div class="circle circle-1"></div>
+                    <div class="circle circle-2"></div>
+                    <div class="circle circle-3"></div>
+                </div>
+            </div>
+
+            <!-- Login Form -->
+            <div class="form-container">
+
+                <div class="text-center mb-5">
+
+                    <img src="/logo 2.png" alt="Course Hub" class="logo mb-3" />
+
+                    <h2 class="fw-bold fs-3 text-dark">
+                        Welcome Back
+                    </h2>
+
+                    <p class="text-muted small">
+                        Log in to continue your learning journey on Course Hub.
+                    </p>
+
+                </div>
+
+                <form [formGroup]="loginForm" (ngSubmit)="login()" class="static-form">
+
+                    <!-- Email -->
+                    <div class="mb-4">
+
+
+                        <app-input-field label="Email Address" type="email" placeholder="Enter your email address"
+                            icon="bi bi-envelope" [showIcon]="true" [value]="loginForm.get('email')?.value || ''"
+                            (valueChange)="loginForm.get('email')?.setValue($event); loginForm.get('email')?.markAsDirty()"
+                            (blurred)="loginForm.get('email')?.markAsTouched()"
+                            [validation]="getValidationState('email')" [errorMessage]="getErrorMessage('email')">
+                        </app-input-field>
+
+                    </div>
+
+                    <!-- Password -->
+                    <div class="mb-2">
+
+                        <app-input-field label="Password" type="password" placeholder="Enter your password"
+                            icon="bi bi-lock" [showIcon]="true" [showPasswordToggle]="true"
+                            [value]="loginForm.get('password')?.value || ''"
+                            (valueChange)="loginForm.get('password')?.setValue($event); loginForm.get('password')?.markAsDirty()"
+                            (blurred)="loginForm.get('password')?.markAsTouched()"
+                            [validation]="getValidationState('password')" [errorMessage]="getErrorMessage('password')">
+                        </app-input-field>
+
+                    </div>
+
+                    <!-- Forgot Password -->
+                    <div class="d-flex justify-content-end mb-4">
+
+                        <a routerLink="/forgot-password" class="text-primary text-decoration-none small fw-semibold">
+                            Forgot password?
+                        </a>
+
+                    </div>
+
+                    <!-- Error -->
+                    @if (errorMessage) {
+
+                    <div class="alert alert-danger py-2 small mb-3">
+                        {{ errorMessage }}
+                    </div>
+
+                    }
+
+                    <!-- Login Button -->
+                    <app-button type="submit" [loading]="isLoading" label="Log In" variant="primary" [block]="true"
+                        class="w-100 d-block">
+
+                        @if (!isLoading) {
+                        <i class="bi bi-box-arrow-in-right me-2"></i>
+                        }
+
+                    </app-button>
+
+                    <!-- Register -->
+                    <div class="text-center mt-5 pb-4">
+
+                        <span class="text-muted small">
+                            Don't have an account?
+                        </span>
+
+                        <a routerLink="/signup" class="text-primary text-decoration-none fw-bold small">
+                            Sign up
+                        </a>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==============================
+             RIGHT: IMAGE BANNER
+        =============================== -->
+        <div class="col-lg-6 d-none d-lg-flex right-column">
+
+            <div class="image-placeholder shadow-lg">
+
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1400&q=85"
+                    alt="Course Hub - Learn from Expert Instructors"
+                    class="banner-image" />
+
+                <!-- Gradient Overlay -->
+                <div class="banner-overlay"></div>
+
+                <!-- Floating Glass Card -->
+                <div class="banner-floating-content">
+                    <div class="badge-pill mb-2">
+                        <i class="bi bi-mortarboard-fill text-info me-1"></i>
+                        <span>Next-Gen Learning Ecosystem</span>
+                    </div>
+                    <h3 class="fw-bold text-white mb-2 fs-5">Empowering Learners &amp; Expert Instructors</h3>
+                    <p class="text-white-50 small mb-0">Explore interactive courses, follow structured learning paths,
+                        and earn verified certifications with industry mentors worldwide.</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>

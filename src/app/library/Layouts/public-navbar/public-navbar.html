@@ -1,0 +1,89 @@
+<nav class="public-navbar-wrapper">
+  <div class="public-navbar container-fluid">
+
+    <!-- =========================
+         BRAND LOGO
+    ========================== -->
+    <a routerLink="/" class="navbar-logo" aria-label="Talent Hub Home">
+
+      <img src="/logo%202.png" alt="Talent Hub Logo" class="logo">
+    </a>
+
+
+    <!-- =========================
+         MOBILE MENU TOGGLE
+    ========================== -->
+    <button type="button" class="mobile-menu-toggle" [class.open]="mobileMenuOpen" (click)="toggleMobileMenu()"
+      [attr.aria-expanded]="mobileMenuOpen" aria-label="Toggle navigation menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <!-- =========================
+         NAVIGATION
+    ========================== -->
+    <div class="navbar-navigation" [class.mobile-open]="mobileMenuOpen">
+      <ul class="navbar-links">
+        <li>
+          <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-link"
+            (click)="closeMobileMenu()">
+            Home
+          </a>
+        </li>
+
+        <li>
+          <a routerLink="/courses" routerLinkActive="active" class="nav-link" (click)="closeMobileMenu()">
+            Courses
+          </a>
+        </li>
+
+        <li>
+          <a routerLink="/learning-paths" routerLinkActive="active" class="nav-link" (click)="closeMobileMenu()">
+            Learning Paths
+          </a>
+        </li>
+
+        <li>
+          <a routerLink="/pricing" routerLinkActive="active" class="nav-link" (click)="closeMobileMenu()">
+            Pricing
+          </a>
+        </li>
+
+        <li>
+          <a routerLink="/become-instructor" routerLinkActive="active" class="nav-link" (click)="closeMobileMenu()">
+            Become an Instructor
+          </a>
+        </li>
+
+        <li>
+          <a routerLink="/about-us" routerLinkActive="active" class="nav-link" (click)="closeMobileMenu()">
+            About Us
+          </a>
+        </li>
+
+        <li>
+          <a routerLink="/help-center" routerLinkActive="active" class="nav-link" (click)="closeMobileMenu()">
+            Help Center
+          </a>
+        </li>
+      </ul>
+
+      <!-- =========================
+           AUTH BUTTONS
+      ========================== -->
+      <div class="navbar-actions">
+
+        <app-button label="Login" variant="outline-primary" size="sm" route="/login" target="_blank"
+          (clicked)="closeMobileMenu()">
+        </app-button>
+
+        <app-button label="Sign Up" variant="primary" size="sm" route="/signup" target="_blank"
+          (clicked)="closeMobileMenu()">
+        </app-button>
+
+      </div>
+    </div>
+
+  </div>
+</nav>
