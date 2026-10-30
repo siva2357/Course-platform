@@ -1,6 +1,12 @@
 /* =========================================================
    COURSE-HUB BUTTON COMPONENT - BLUE THEME PALETTE
 ========================================================= */
+:host(.w-100),
+:host(.d-block) {
+  display: block;
+  width: 100%;
+}
+
 .btn {
   display: inline-flex;
   align-items: center;

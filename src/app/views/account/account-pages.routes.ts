@@ -8,10 +8,12 @@ import { ResetPassword } from './reset-password/reset-password';
 import { ChangePasswordPage } from './change-password-page/change-password-page';
 import { MyProfilePage } from './my-profile-page/my-profile-page';
 import { AccountSettingsPage } from './account-settings-page/account-settings-page';
+import { RegisterPage } from './register-page/register-page';
 
 export const ACCOUNT_ROUTES: Routes = [
   { path: 'login', component: LoginPage },
   { path: 'signup', component: SignupPage },
+  { path: 'register', component: RegisterPage },
   { path: 'otp-verification', component: OtpVerificationPage },
   { path: 'forgot-password', component: ForgotPasswordPage },
   { path: 'reset-password', component: ResetPassword },

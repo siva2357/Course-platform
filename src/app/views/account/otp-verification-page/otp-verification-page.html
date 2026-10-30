@@ -1,1 +1,60 @@
-<p>otp-verification-page works!</p>
+<div class="otp-layout d-flex align-items-center justify-content-center min-vh-100 p-3">
+  <div class="otp-card shadow-sm">
+    <div class="text-center mb-4">
+      <img src="/logo 2.png" alt="Course Hub" class="logo mb-3" />
+      <h1 class="h4 fw-bold text-dark mb-2">Verify Your Email Address</h1>
+      <p class="text-muted small mb-0">
+        We sent a 6-digit verification code to<br />
+        <strong class="text-dark">{{ email }}</strong>
+      </p>
+    </div>
+
+    <!-- 6-Digit OTP Input Boxes -->
+    <div class="otp-inputs d-flex justify-content-between gap-2 mb-4">
+      @for (digit of otpDigits; track $index; let idx = $index) {
+        <input
+          [id]="'otp-' + idx"
+          type="text"
+          inputmode="numeric"
+          maxlength="1"
+          class="otp-box"
+          [value]="otpDigits[idx]"
+          (input)="onDigitInput(idx, $event)"
+          (keydown)="onKeyDown(idx, $event)"
+          aria-label="OTP Digit" />
+      }
+    </div>
+
+    @if (errorMessage) {
+      <div class="alert alert-danger py-2 small text-center mb-3">
+        {{ errorMessage }}
+      </div>
+    }
+
+    @if (resentMessage) {
+      <div class="alert alert-info py-2 small text-center mb-3">
+        {{ resentMessage }}
+      </div>
+    }
+
+    <app-button
+      type="button"
+      label="Verify & Continue"
+      variant="primary"
+      [block]="true"
+      class="w-100 d-block"
+      (clicked)="verifyOtp()">
+      <i class="bi bi-check2-circle me-1"></i>
+    </app-button>
+
+    <div class="text-center mt-4 pt-3 border-top">
+      <p class="text-muted small mb-2">
+        Didn't receive the code?
+        <button type="button" class="btn-resend" (click)="resendCode()">Resend OTP</button>
+      </p>
+      <a routerLink="/login" class="text-primary small fw-semibold text-decoration-none">
+        <i class="bi bi-arrow-left me-1"></i>Back to Log In
+      </a>
+    </div>
+  </div>
+</div>

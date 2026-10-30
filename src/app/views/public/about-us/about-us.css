@@ -1,0 +1,194 @@
+/* =========================================================
+   ABOUT US PAGE - BLUE ECOSYSTEM THEME WITH IMAGES
+========================================================= */
+
+.about-page {
+  font-family: 'Inter', sans-serif;
+}
+
+.about-hero {
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #0d6efd 100%);
+  border-radius: 24px;
+  padding: 44px 36px;
+  color: #ffffff;
+}
+
+.about-eyebrow {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #93c5fd;
+  margin-bottom: 8px;
+}
+
+.about-title {
+  font-family: 'Outfit', 'Inter', sans-serif;
+  font-size: clamp(1.85rem, 3.2vw, 2.55rem);
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.about-subtitle {
+  color: #cbd5e1;
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+.btn-about-white {
+  padding: 12px 24px;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #0d6efd;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.btn-about-outline {
+  padding: 12px 24px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.about-hero-visual {
+  position: relative;
+}
+
+.about-hero-img {
+  width: 100%;
+  height: 330px;
+  object-fit: cover;
+  border-radius: 18px;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.3);
+}
+
+.about-floating-badge {
+  position: absolute;
+  bottom: -14px;
+  left: 20px;
+  background: #ffffff;
+  color: #0f172a;
+  padding: 12px 16px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.18);
+}
+
+.badge-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: #eff6ff;
+  color: #0d6efd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.extra-small {
+  font-size: 11.5px;
+}
+
+/* Story Collage */
+.story-img-main {
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+.story-img-sub {
+  width: 100%;
+  height: 145px;
+  object-fit: cover;
+  border-radius: 14px;
+}
+
+.section-tag {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #0d6efd;
+}
+
+.about-stat-card {
+  background: #ffffff;
+  border: 1px solid #dbeafe;
+  border-radius: 14px;
+  padding: 18px;
+  text-align: center;
+}
+
+/* Value Cards with Image */
+.value-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.value-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 28px rgba(15, 23, 42, 0.08);
+}
+
+.value-img-wrap {
+  position: relative;
+  height: 180px;
+}
+
+.value-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.value-icon-floating {
+  position: absolute;
+  bottom: -18px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #0d6efd 0%, #0d99fd 100%);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  box-shadow: 0 8px 18px rgba(13, 110, 253, 0.3);
+}
+
+/* Leadership Section */
+.leadership-section {
+  background: linear-gradient(180deg, #f8fafc 0%, #eff6ff 100%);
+  border: 1px solid #dbeafe;
+  border-radius: 22px;
+}
+
+.leader-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 26px 22px;
+}
+
+.leader-avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #dbeafe;
+}

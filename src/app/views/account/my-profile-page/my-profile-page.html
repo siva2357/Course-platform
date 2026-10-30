@@ -1,1 +1,363 @@
-<p>my-profile-page works!</p>
+<div class="my-profile-page container py-4">
+
+  <!-- =========================================================
+       ROLE VERSION SWITCHER BAR (LEARNER vs INSTRUCTOR)
+  ========================================================== -->
+  <div class="role-switcher-bar d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+    <div class="d-flex align-items-center gap-2">
+      <span class="fw-bold text-dark small">CourseHub Profile Mode:</span>
+      <div class="role-toggle-group d-inline-flex p-1">
+        <button
+          type="button"
+          class="role-toggle-btn"
+          [class.active]="activeRole === UserRole.Learner"
+          (click)="switchRole(UserRole.Learner)">
+          <i class="bi bi-mortarboard-fill me-1"></i>Learner Profile
+        </button>
+        <button
+          type="button"
+          class="role-toggle-btn"
+          [class.active]="activeRole === UserRole.Instructor"
+          (click)="switchRole(UserRole.Instructor)">
+          <i class="bi bi-easel2-fill me-1"></i>Instructor Profile
+        </button>
+      </div>
+    </div>
+
+    <div class="d-flex flex-wrap gap-2">
+      <a routerLink="/account-settings" class="btn btn-outline-primary btn-sm">
+        <i class="bi bi-gear me-1"></i>Account Settings
+      </a>
+      <a routerLink="/change-password" class="btn btn-outline-primary btn-sm">
+        <i class="bi bi-shield-lock me-1"></i>Change Password
+      </a>
+    </div>
+  </div>
+
+  @if (savedBanner) {
+    <div class="alert alert-primary small py-2 mb-4">
+      <i class="bi bi-check-circle-fill me-1"></i>
+      Your {{ activeRole === UserRole.Instructor ? 'Instructor Educator' : 'Learner Study' }} profile has been updated.
+    </div>
+  }
+
+  <!-- =========================================================
+       VERSION 1: LEARNER PROFILE (COURSE PLATFORM STUDENT)
+  ========================================================== -->
+  @if (activeRole === UserRole.Learner) {
+    <section class="profile-hero mb-4">
+      <div class="row align-items-center g-4">
+        <div class="col-md-auto text-center">
+          <img [src]="learnerProfile.avatar" [alt]="learnerProfile.fullName" class="profile-avatar-lg" />
+        </div>
+        <div class="col-md">
+          <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+            <span class="role-badge">
+              <i class="bi bi-mortarboard-fill me-1"></i>CourseHub Learner • {{ learnerProfile.studentId }}
+            </span>
+            <span class="streak-pill">
+              <i class="bi bi-fire text-warning me-1"></i>{{ learnerProfile.stats.streakDays }}-Day Learning Streak
+            </span>
+          </div>
+          <h1 class="h3 fw-bold mb-1">{{ learnerProfile.fullName }}</h1>
+          <p class="text-white-50 small mb-3">
+            <i class="bi bi-diagram-3 text-info me-1"></i>Enrolled Track: {{ learnerProfile.learningTrack }}
+          </p>
+
+          <div class="d-flex flex-wrap gap-4 small">
+            <div>
+              <strong class="text-white d-block fs-6">{{ learnerProfile.stats.enrolledCourses }}</strong>
+              <span class="text-white-50 extra-small">Enrolled Courses</span>
+            </div>
+            <div>
+              <strong class="text-white d-block fs-6">{{ learnerProfile.stats.completedCourses }}</strong>
+              <span class="text-white-50 extra-small">Completed Courses</span>
+            </div>
+            <div>
+              <strong class="text-white d-block fs-6">{{ learnerProfile.stats.quizzesPassed }}</strong>
+              <span class="text-white-50 extra-small">Quizzes Passed</span>
+            </div>
+            <div>
+              <strong class="text-white d-block fs-6">{{ learnerProfile.stats.certificatesEarned }}</strong>
+              <span class="text-white-50 extra-small">Course Certificates</span>
+            </div>
+            <div>
+              <strong class="text-info d-block fs-6">{{ learnerProfile.stats.learningHours }}</strong>
+              <span class="text-white-50 extra-small">Video Watch Time</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="row g-4">
+      <!-- Left Column: Active Courses & Study Preferences Form -->
+      <div class="col-lg-8">
+
+        <!-- Active Courses Progress -->
+        <div class="profile-card mb-4">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="h5 fw-bold text-dark mb-0">
+              <i class="bi bi-play-btn-fill text-primary me-2"></i>Courses In Progress
+            </h2>
+            <a routerLink="/courses" class="text-primary small fw-semibold text-decoration-none">Browse More Courses</a>
+          </div>
+
+          <div class="d-flex flex-column gap-3">
+            @for (course of learnerProfile.activeCourses; track course.id) {
+              <div class="course-progress-box">
+                <div class="d-flex flex-wrap justify-content-between align-items-start gap-2 mb-2">
+                  <div>
+                    <h3 class="h6 fw-bold text-dark mb-1">
+                      <a [routerLink]="['/courses', course.id]" class="text-dark text-decoration-none">{{ course.title }}</a>
+                    </h3>
+                    <div class="text-muted extra-small">
+                      Instructor: <strong>{{ course.instructor }}</strong> • {{ course.lastLesson }}
+                    </div>
+                  </div>
+                  <span class="badge bg-primary-subtle text-primary">{{ course.progress }}% Complete</span>
+                </div>
+
+                <div class="progress-bar-track mb-2">
+                  <div class="progress-bar-fill" [style.width.%]="course.progress"></div>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center extra-small text-muted">
+                  <span><i class="bi bi-check2-square text-primary me-1"></i>{{ course.completedLessons }}</span>
+                  <a [routerLink]="['/courses', course.id]" class="fw-bold text-primary text-decoration-none">
+                    Continue Lesson <i class="bi bi-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- Learner Study Profile Form -->
+        <div class="profile-card">
+          <h2 class="h5 fw-bold text-dark mb-3">
+            <i class="bi bi-sliders text-primary me-2"></i>Learner Account &amp; Study Preferences
+          </h2>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label small fw-semibold text-dark">Student Full Name</label>
+              <input type="text" class="form-control" [(ngModel)]="learnerProfile.fullName" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-semibold text-dark">Registered Email</label>
+              <input type="email" class="form-control" [(ngModel)]="learnerProfile.email" readonly />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-semibold text-dark">Enrolled Learning Path</label>
+              <input type="text" class="form-control" [(ngModel)]="learnerProfile.learningTrack" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-semibold text-dark">Daily Study Goal</label>
+              <input type="text" class="form-control" [(ngModel)]="learnerProfile.dailyStudyGoal" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-semibold text-dark">Course Audio &amp; Subtitle Language</label>
+              <input type="text" class="form-control" [(ngModel)]="learnerProfile.preferredLanguage" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-semibold text-dark">Interested Course Topics</label>
+              <input type="text" class="form-control" [(ngModel)]="learnerProfile.favoriteSubjects" />
+            </div>
+            <div class="col-12">
+              <label class="form-label small fw-semibold text-dark">Learner Bio &amp; Study Notes</label>
+              <textarea rows="3" class="form-control" [(ngModel)]="learnerProfile.learningBio"></textarea>
+            </div>
+          </div>
+
+          <div class="mt-4">
+            <app-button type="button" label="Save Learner Preferences" variant="primary" (clicked)="saveProfile()">
+              <i class="bi bi-check2-circle me-1"></i>
+            </app-button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Earned Course Certificates -->
+      <div class="col-lg-4">
+        <div class="profile-card mb-4">
+          <h3 class="h6 fw-bold text-dark mb-3">
+            <i class="bi bi-award-fill text-primary me-1"></i>Earned Course Certificates
+          </h3>
+          <div class="d-flex flex-column gap-3">
+            @for (cert of learnerProfile.certificates; track cert.id) {
+              <div class="cert-mini-box">
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                  <span class="badge bg-primary-subtle text-primary extra-small">{{ cert.grade }}</span>
+                  <span class="text-muted extra-small">{{ cert.date }}</span>
+                </div>
+                <div class="fw-bold text-dark small mb-1">{{ cert.title }}</div>
+                <div class="text-muted extra-small mb-2">Instructor: {{ cert.instructor }} • {{ cert.id }}</div>
+                <a routerLink="/courses" class="text-primary extra-small fw-bold text-decoration-none">
+                  <i class="bi bi-download me-1"></i>Download Certificate PDF
+                </a>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- =========================================================
+       VERSION 2: INSTRUCTOR PROFILE (COURSE CREATOR & EDUCATOR)
+  ========================================================== -->
+  @if (activeRole === UserRole.Instructor) {
+    <section class="profile-hero instructor-hero mb-4">
+      <div class="row align-items-center g-4">
+        <div class="col-md-auto text-center">
+          <img [src]="instructorProfile.avatar" [alt]="instructorProfile.fullName" class="profile-avatar-lg" />
+        </div>
+        <div class="col-md">
+          <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+            <span class="role-badge">
+              <i class="bi bi-easel2-fill me-1"></i>Verified CourseHub Educator • {{ instructorProfile.instructorId }}
+            </span>
+            <span class="streak-pill">
+              <i class="bi bi-patch-check-fill text-info me-1"></i>Top Rated Course Creator
+            </span>
+          </div>
+          <h1 class="h3 fw-bold mb-1">{{ instructorProfile.fullName }}</h1>
+          <p class="text-white-50 small mb-3">
+            <i class="bi bi-journal-code text-info me-1"></i>Department: {{ instructorProfile.department }}
+          </p>
+
+          <div class="d-flex flex-wrap gap-4 small">
+            <div>
+              <strong class="text-warning d-block fs-6">{{ instructorProfile.stats.rating }}</strong>
+              <span class="text-white-50 extra-small">{{ instructorProfile.stats.totalReviews }} Course Reviews</span>
+            </div>
+            <div>
+              <strong class="text-white d-block fs-6">{{ instructorProfile.stats.totalStudents }}</strong>
+              <span class="text-white-50 extra-small">Enrolled Students</span>
+            </div>
+            <div>
+              <strong class="text-white d-block fs-6">{{ instructorProfile.stats.publishedCourses }}</strong>
+              <span class="text-white-50 extra-small">Published Courses</span>
+            </div>
+            <div>
+              <strong class="text-info d-block fs-6">{{ instructorProfile.stats.qaResponseRate }}</strong>
+              <span class="text-white-50 extra-small">Student Q&amp;A Answered</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-auto">
+          <a [routerLink]="['/instructors', instructorProfile.id]" class="btn-top-link">
+            <i class="bi bi-box-arrow-up-right me-1"></i>Public Course Catalog Profile
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="row g-4">
+      <div class="col-lg-8">
+
+        <!-- Published Courses List -->
+        <div class="profile-card mb-4">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="h5 fw-bold text-dark mb-0">
+              <i class="bi bi-collection-play-fill text-primary me-2"></i>Published Courses on CourseHub
+            </h2>
+            <a routerLink="/courses" class="text-primary small fw-semibold text-decoration-none">View Catalog</a>
+          </div>
+
+          <div class="d-flex flex-column gap-3">
+            @for (course of instructorProfile.publishedCourses; track course.id) {
+              <div class="course-progress-box">
+                <div class="d-flex flex-wrap justify-content-between align-items-start gap-2 mb-1">
+                  <h3 class="h6 fw-bold text-dark mb-0">
+                    <a [routerLink]="['/courses', course.id]" class="text-dark text-decoration-none">{{ course.title }}</a>
+                  </h3>
+                  <span class="badge bg-success-subtle text-success">{{ course.status }}</span>
+                </div>
+                <div class="d-flex flex-wrap gap-3 text-muted extra-small mt-2">
+                  <span><i class="bi bi-people-fill text-primary me-1"></i>{{ course.students }}</span>
+                  <span><i class="bi bi-star-fill text-warning me-1"></i>{{ course.rating }}</span>
+                  <span><i class="bi bi-journal-bookmark text-primary me-1"></i>{{ course.modules }}</span>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- Instructor Educator Profile Form -->
+        <div class="profile-card">
+          <h2 class="h5 fw-bold text-dark mb-3">
+            <i class="bi bi-easel2-fill text-primary me-2"></i>Instructor Profile &amp; Course Teaching Settings
+          </h2>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label small fw-semibold text-dark">Instructor Display Name</label>
+              <input type="text" class="form-control" [(ngModel)]="instructorProfile.fullName" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-semibold text-dark">Educator Email</label>
+              <input type="email" class="form-control" [(ngModel)]="instructorProfile.email" readonly />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-semibold text-dark">Academic / Educator Title</label>
+              <input type="text" class="form-control" [(ngModel)]="instructorProfile.academicTitle" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-semibold text-dark">Course Category Department</label>
+              <input type="text" class="form-control" [(ngModel)]="instructorProfile.department" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-semibold text-dark">Course Instruction Language</label>
+              <input type="text" class="form-control" [(ngModel)]="instructorProfile.teachingLanguage" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-semibold text-dark">Student Q&amp;A Forum Schedule</label>
+              <input type="text" class="form-control" [(ngModel)]="instructorProfile.qaSchedule" />
+            </div>
+            <div class="col-12">
+              <label class="form-label small fw-semibold text-dark">Instructor Bio (Displayed on Course Details Pages)</label>
+              <textarea rows="3" class="form-control" [(ngModel)]="instructorProfile.bio"></textarea>
+            </div>
+          </div>
+
+          <div class="mt-4">
+            <app-button type="button" label="Save Instructor Profile" variant="primary" (clicked)="saveProfile()">
+              <i class="bi bi-check2-circle me-1"></i>
+            </app-button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Course Subjects & Studio Status -->
+      <div class="col-lg-4">
+        <div class="profile-card mb-4">
+          <h3 class="h6 fw-bold text-dark mb-3">
+            <i class="bi bi-journal-code text-primary me-1"></i>Subjects Taught on CourseHub
+          </h3>
+          <div class="d-flex flex-wrap gap-2">
+            @for (tag of instructorProfile.courseTopics; track tag) {
+              <span class="skill-chip">{{ tag }}</span>
+            }
+          </div>
+        </div>
+
+        <div class="profile-card">
+          <h3 class="h6 fw-bold text-dark mb-3">
+            <i class="bi bi-cash-coin text-primary me-1"></i>Course Royalty &amp; Payout Status
+          </h3>
+          <div class="cert-mini-box mb-2">
+            <div class="fw-bold text-dark small">85% Course Enrollment Royalty</div>
+            <div class="text-muted extra-small">Next monthly course payout: Nov 5, 2026</div>
+          </div>
+          <div class="cert-mini-box">
+            <div class="fw-bold text-dark small">Course Quality Verification</div>
+            <div class="text-success extra-small fw-semibold">
+              <i class="bi bi-check-circle-fill me-1"></i>4K Video &amp; Lab Access Approved
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+
+</div>

@@ -1,0 +1,77 @@
+/* =========================================================
+   SIGNUP ROLE SELECTION PAGE - COURSE HUB BLUE THEME
+========================================================= */
+
+.signup-container {
+    padding: 32px 16px;
+    background: radial-gradient(circle at 15% 15%, #eff6ff 0%, #ffffff 55%, #f0f9ff 100%);
+    font-family: 'Inter', 'Outfit', sans-serif;
+}
+
+.logo {
+    display: block;
+    width: auto;
+    height: 75px;
+    max-width: 210px;
+    object-fit: contain;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.max-w-4xl {
+    max-width: 840px;
+}
+
+.role-card {
+    position: relative;
+    padding: 28px 20px;
+    border-radius: 18px;
+    background: #ffffff;
+    border: 2px solid #e2e8f0 !important;
+    cursor: pointer;
+    transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, background-color 0.22s ease;
+}
+
+.role-card:hover {
+    transform: translateY(-4px);
+    border-color: #93c5fd !important;
+    box-shadow: 0 14px 30px rgba(13, 110, 253, 0.1) !important;
+}
+
+.role-card.selected {
+    border-color: #0d6efd !important;
+    background: #f8fbff;
+    box-shadow: 0 16px 34px rgba(13, 110, 253, 0.16) !important;
+}
+
+.check-circle {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    font-size: 1.35rem;
+    line-height: 1;
+}
+
+.icon-wrapper {
+    width: 76px;
+    height: 76px;
+    background: #eff6ff;
+    border: 1px solid #dbeafe;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.role-card:hover .icon-wrapper,
+.role-card.selected .icon-wrapper {
+    background: #dbeafe;
+    transform: scale(1.05);
+}
+
+.role-description {
+    max-width: 270px;
+    line-height: 1.55;
+}
+
+.continue-btn-wrap {
+    width: 100%;
+    max-width: 320px;
+}

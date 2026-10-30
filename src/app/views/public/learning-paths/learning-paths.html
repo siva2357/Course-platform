@@ -1,1 +1,91 @@
-<p>learning-paths works!</p>
+<div class="learning-paths-page">
+
+  <!-- =========================================================
+       HERO HEADER
+  ========================================================== -->
+  <section class="paths-hero text-center mb-5">
+    <span class="paths-eyebrow">Structured Career Roadmaps</span>
+    <h1 class="paths-title mb-3">Guided Learning Paths for High-Growth Roles</h1>
+    <p class="paths-subtitle mx-auto mb-4">
+      Stop guessing what to learn next. Follow step-by-step curriculums curated by principal engineers, complete
+      milestone capstones, and earn role-verified certificates.
+    </p>
+
+    <!-- Role Track Filter Pills -->
+    <div class="d-flex flex-wrap justify-content-center gap-2">
+      @for (filter of roleFilters; track filter) {
+        <button
+          type="button"
+          class="track-filter-btn"
+          [class.active]="selectedRoleTrack === filter"
+          (click)="selectedRoleTrack = filter">
+          {{ filter }}
+        </button>
+      }
+    </div>
+  </section>
+
+  <!-- =========================================================
+       LEARNING PATHS LIST
+  ========================================================== -->
+  <div class="row g-4">
+    @for (path of filteredPaths; track path.id) {
+      <div class="col-lg-6">
+        <div class="path-card h-100 d-flex flex-column">
+          <div class="d-flex justify-content-between align-items-start mb-3">
+            <div class="d-flex align-items-center gap-3">
+              <div class="path-icon-box">
+                <i class="bi" [class]="path.icon"></i>
+              </div>
+              <div>
+                <span class="path-category">{{ path.category }}</span>
+                <h2 class="h5 fw-bold text-dark mb-0 mt-1">{{ path.title }}</h2>
+              </div>
+            </div>
+            <span class="path-level-badge">{{ path.level }}</span>
+          </div>
+
+          <p class="text-muted small mb-3">{{ path.summary }}</p>
+
+          <!-- Meta Metrics -->
+          <div class="path-metrics d-flex flex-wrap gap-3 mb-4">
+            <span><i class="bi bi-calendar-week text-primary me-1"></i>{{ path.duration }}</span>
+            <span><i class="bi bi-journal-bookmark text-primary me-1"></i>{{ path.coursesCount }} Courses</span>
+            <span><i class="bi bi-code-slash text-primary me-1"></i>{{ path.projectsCount }} Projects</span>
+            <span><i class="bi bi-people text-primary me-1"></i>{{ path.learners }} Learners</span>
+          </div>
+
+          <!-- Milestone Steps -->
+          <div class="milestone-box mb-4 flex-grow-1">
+            <div class="fw-bold text-dark small mb-2">Milestone Progression:</div>
+            <div class="d-flex flex-column gap-2">
+              @for (step of path.steps; track step; let idx = $index) {
+                <div class="milestone-step d-flex align-items-center gap-2 small">
+                  <span class="step-num">{{ idx + 1 }}</span>
+                  <span class="text-dark">{{ step }}</span>
+                </div>
+              }
+            </div>
+          </div>
+
+          <!-- Skills & CTA -->
+          <div class="d-flex flex-wrap gap-1 mb-3">
+            @for (skill of path.skills; track skill) {
+              <span class="skill-tag">{{ skill }}</span>
+            }
+          </div>
+
+          <div class="d-flex justify-content-between align-items-center pt-3 border-top mt-auto">
+            <span class="text-muted extra-small">
+              <i class="bi bi-patch-check-fill text-primary me-1"></i>Includes Role Capstone Certificate
+            </span>
+            <a routerLink="/courses" class="btn-start-path">
+              Start Learning Path <i class="bi bi-arrow-right ms-1"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+
+</div>

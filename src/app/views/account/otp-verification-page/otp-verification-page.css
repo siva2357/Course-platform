@@ -1,0 +1,69 @@
+/* =========================================================
+   OTP VERIFICATION PAGE - COURSE HUB BLUE THEME
+========================================================= */
+
+.otp-layout {
+  background: radial-gradient(circle at 15% 15%, #eff6ff 0%, #ffffff 55%, #f0f9ff 100%);
+  font-family: 'Inter', 'Outfit', sans-serif;
+}
+
+.otp-card {
+  width: 100%;
+  max-width: 440px;
+  background: #ffffff;
+  border: 1px solid #dbeafe;
+  border-radius: 20px;
+  padding: 36px 32px;
+}
+
+.otp-card app-button {
+  display: block;
+  width: 100%;
+}
+
+.logo {
+  display: block;
+  width: auto;
+  height: 68px;
+  max-width: 210px;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+.otp-inputs {
+  width: 100%;
+}
+
+.otp-box {
+  flex: 1;
+  max-width: 54px;
+  height: 56px;
+  border-radius: 12px;
+  border: 2px solid #cbd5e1;
+  background: #f8fafc;
+  text-align: center;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #0f172a;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.otp-box:focus {
+  border-color: #0d6efd;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.16);
+}
+
+.btn-resend {
+  border: none;
+  background: transparent;
+  color: #0d6efd;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0 4px;
+}
+
+.btn-resend:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,92 @@
+/* =========================================================
+   INSTRUCTOR PROFILE PAGE - BLUE ECOSYSTEM THEME
+========================================================= */
+
+.instructor-profile-page {
+  font-family: 'Inter', sans-serif;
+}
+
+.inst-hero {
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #0d6efd 100%);
+  border-radius: 22px;
+  padding: 36px 32px;
+  color: #ffffff;
+}
+
+.inst-hero-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #38bdf8;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+.inst-verified-pill {
+  background: rgba(56, 189, 248, 0.2);
+  border: 1px solid rgba(56, 189, 248, 0.45);
+  color: #e0f2fe;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+.inst-name {
+  font-family: 'Outfit', 'Inter', sans-serif;
+  font-size: clamp(1.75rem, 3vw, 2.35rem);
+  font-weight: 800;
+}
+
+.inst-role {
+  color: #93c5fd;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.inst-stat-val {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.inst-stat-lbl {
+  font-size: 12px;
+  color: #cbd5e1;
+}
+
+.inst-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.skill-badge {
+  background: #eff6ff;
+  color: #0d6efd;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 11px;
+  border-radius: 8px;
+}
+
+.inst-course-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.inst-course-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+}
+
+.inst-course-thumb {
+  width: 100%;
+  height: 165px;
+  object-fit: cover;
+}
+

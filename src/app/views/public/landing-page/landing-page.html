@@ -1,1 +1,299 @@
-<p>landing-page works!</p>
+<div class="landing-page">
+
+  <!-- =========================================================
+       HERO SECTION
+  ========================================================== -->
+  <section class="hero-section">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-7">
+        <div class="hero-badge mb-3">
+          <i class="bi bi-stars text-primary"></i>
+          <span>The Complete Learning, Teaching &amp; Skill Ecosystem</span>
+        </div>
+
+        <h1 class="hero-title mb-3">
+          Master In-Demand Skills with
+          <span class="text-gradient">Expert-Led Courses</span>
+        </h1>
+
+        <p class="hero-subtitle mb-4">
+          CourseHub connects ambitious <strong>Learners</strong>, world-class <strong>Instructors</strong>, and modern
+          <strong>Organizations</strong> in one unified learning ecosystem. Learn by building real projects and earn
+          verified credentials.
+        </p>
+
+        <!-- Search Bar -->
+        <div class="hero-search-bar mb-4">
+          <i class="bi bi-search search-icon"></i>
+          <input
+            type="text"
+            [(ngModel)]="searchQuery"
+            placeholder="Search 420+ courses, skills, or instructors (e.g., Angular, GenAI, AWS)..."
+            class="hero-search-input" />
+          <a [routerLink]="['/courses']" [queryParams]="{ q: searchQuery || null }" class="hero-search-btn">
+            Explore Courses
+          </a>
+        </div>
+
+        <!-- Quick Popular Tags -->
+        <div class="popular-tags d-flex flex-wrap align-items-center gap-2">
+          <span class="text-muted small fw-semibold me-1">Popular:</span>
+          <a routerLink="/courses" class="tag-chip">Angular 19</a>
+          <a routerLink="/courses" class="tag-chip">Generative AI</a>
+          <a routerLink="/courses" class="tag-chip">.NET Microservices</a>
+          <a routerLink="/courses" class="tag-chip">Kubernetes</a>
+          <a routerLink="/learning-paths" class="tag-chip">Full-Stack Career Track</a>
+        </div>
+      </div>
+
+      <div class="col-lg-5">
+        <div class="hero-visual-card">
+          <img
+            src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1000&q=85"
+            alt="Students learning on CourseHub"
+            class="hero-main-img" />
+
+          <!-- Floating KPI Card 1 -->
+          <div class="floating-stat-card stat-top-left">
+            <div class="stat-icon bg-primary-subtle text-primary">
+              <i class="bi bi-patch-check-fill"></i>
+            </div>
+            <div>
+              <div class="fw-bold text-dark small">Verified Certificates</div>
+              <div class="text-muted extra-small">Recognized by top employers</div>
+            </div>
+          </div>
+
+          <!-- Floating KPI Card 2 -->
+          <div class="floating-stat-card stat-bottom-right">
+            <div class="stat-icon bg-info-subtle text-primary">
+              <i class="bi bi-play-btn-fill"></i>
+            </div>
+            <div>
+              <div class="fw-bold text-dark small">420+ Interactive Courses</div>
+              <div class="text-muted extra-small">Hands-on labs &amp; mentor Q&amp;A</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       PLATFORM METRICS STRIP
+  ========================================================== -->
+  <section class="stats-strip my-5">
+    <div class="row g-3">
+      @for (stat of stats; track stat.label) {
+        <div class="col-6 col-md-3">
+          <div class="stat-box">
+            <div class="stat-box-icon">
+              <i class="bi" [class]="stat.icon"></i>
+            </div>
+            <div>
+              <h3 class="stat-value mb-0">{{ stat.value }}</h3>
+              <p class="stat-label mb-0">{{ stat.label }}</p>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- =========================================================
+       BROWSE CATEGORIES & FEATURED COURSES
+  ========================================================== -->
+  <section class="featured-section my-5 pt-2">
+    <div class="d-flex flex-wrap justify-content-between align-items-end mb-4 gap-3">
+      <div>
+        <span class="section-eyebrow">Course Catalog</span>
+        <h2 class="section-title mb-1">Explore Top-Rated Courses</h2>
+        <p class="text-muted mb-0">Curated courses designed and taught by verified industry practitioners.</p>
+      </div>
+      <app-button label="View All Courses" variant="outline-primary" size="md" route="/courses">
+        <i class="bi bi-arrow-right"></i>
+      </app-button>
+    </div>
+
+    <!-- Category Pills -->
+    <div class="category-pills-wrapper mb-4">
+      @for (cat of categories; track cat.name) {
+        <button
+          type="button"
+          class="category-pill"
+          [class.active]="selectedCategory === cat.name"
+          (click)="selectCategory(cat.name)">
+          <i class="bi" [class]="cat.icon"></i>
+          <span>{{ cat.name }}</span>
+          <small class="cat-count">{{ cat.count }}</small>
+        </button>
+      }
+    </div>
+
+    <!-- Course Cards Grid -->
+    <div class="row g-4">
+      @for (course of filteredCourses; track course.id) {
+        <div class="col-md-6 col-lg-4">
+          <div class="course-card h-100 d-flex flex-column">
+            <div class="course-thumb-wrapper">
+              <img [src]="course.thumbnail" [alt]="course.title" class="course-thumb" />
+              <span class="course-badge">{{ course.badge }}</span>
+              <span class="course-level-tag">{{ course.level }}</span>
+            </div>
+
+            <div class="course-body d-flex flex-column flex-grow-1 p-4">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="course-category-tag">{{ course.category }}</span>
+                <div class="course-rating">
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <span class="fw-bold text-dark ms-1">{{ course.rating }}</span>
+                  <span class="text-muted small">({{ course.reviews }})</span>
+                </div>
+              </div>
+
+              <h3 class="course-card-title mb-2">
+                <a [routerLink]="['/courses', course.id]">{{ course.title }}</a>
+              </h3>
+
+              <!-- Instructor Row -->
+              <a [routerLink]="['/instructors', course.instructor.id]" class="instructor-mini d-flex align-items-center gap-2 mb-3 text-decoration-none">
+                <img [src]="course.instructor.avatar" [alt]="course.instructor.name" class="instructor-avatar-xs" />
+                <div>
+                  <div class="text-dark fw-semibold small">{{ course.instructor.name }}</div>
+                  <div class="text-muted extra-small">{{ course.instructor.role }}</div>
+                </div>
+              </a>
+
+              <!-- Meta info -->
+              <div class="course-meta-row d-flex align-items-center gap-3 text-muted small mt-auto pt-3 border-top">
+                <span><i class="bi bi-clock me-1 text-primary"></i>{{ course.duration }}</span>
+                <span><i class="bi bi-collection-play me-1 text-primary"></i>{{ course.lessons }} lessons</span>
+                <span><i class="bi bi-people me-1 text-primary"></i>{{ course.students }}</span>
+              </div>
+
+              <!-- Price + CTA -->
+              <div class="d-flex justify-content-between align-items-center mt-3 pt-2">
+                <div>
+                  <span class="course-price">${{ course.price }}</span>
+                  <span class="course-original-price ms-2">${{ course.originalPrice }}</span>
+                </div>
+                <a [routerLink]="['/courses', course.id]" class="btn-course-view">
+                  View Details <i class="bi bi-arrow-up-right ms-1"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- =========================================================
+       ECOSYSTEM PILLARS (LEARNER, INSTRUCTOR, ADMIN)
+  ========================================================== -->
+  <section class="ecosystem-section my-5 py-5 px-4 px-md-5">
+    <div class="text-center max-w-700 mx-auto mb-5">
+      <span class="section-eyebrow">3-Role Unified Architecture</span>
+      <h2 class="section-title mb-2">Built for the Entire Learning Ecosystem</h2>
+      <p class="text-muted mb-0">
+        Whether you are mastering new skills, teaching thousands of students, or managing organizational learning,
+        CourseHub provides tailored workspaces for every role.
+      </p>
+    </div>
+
+    <div class="row g-4">
+      @for (pillar of ecosystemPillars; track pillar.role) {
+        <div class="col-lg-4">
+          <div class="ecosystem-card h-100 d-flex flex-column">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <span class="role-pill">{{ pillar.role }}</span>
+              <div class="ecosystem-icon">
+                <i class="bi" [class]="pillar.icon"></i>
+              </div>
+            </div>
+
+            <h3 class="h5 fw-bold text-dark mb-2">{{ pillar.title }}</h3>
+            <p class="text-muted small mb-4">{{ pillar.description }}</p>
+
+            <ul class="ecosystem-feature-list list-unstyled mb-4 flex-grow-1">
+              @for (feat of pillar.features; track feat) {
+                <li class="d-flex align-items-start gap-2 mb-2 small text-dark">
+                  <i class="bi bi-check-circle-fill text-primary mt-1"></i>
+                  <span>{{ feat }}</span>
+                </li>
+              }
+            </ul>
+
+            <a [routerLink]="pillar.ctaRoute" class="ecosystem-link mt-auto">
+              {{ pillar.ctaLabel }} <i class="bi bi-arrow-right ms-1"></i>
+            </a>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- =========================================================
+       TESTIMONIALS
+  ========================================================== -->
+  <section class="testimonials-section my-5">
+    <div class="text-center max-w-700 mx-auto mb-4">
+      <span class="section-eyebrow">Community Voices</span>
+      <h2 class="section-title mb-2">Trusted by Learners &amp; Instructors Worldwide</h2>
+    </div>
+
+    <div class="row g-4">
+      @for (item of testimonials; track item.name) {
+        <div class="col-md-4">
+          <div class="testimonial-card h-100 d-flex flex-column justify-content-between">
+            <div>
+              <div class="text-warning mb-3">
+                <i class="bi bi-star-fill me-1"></i>
+                <i class="bi bi-star-fill me-1"></i>
+                <i class="bi bi-star-fill me-1"></i>
+                <i class="bi bi-star-fill me-1"></i>
+                <i class="bi bi-star-fill"></i>
+              </div>
+              <p class="testimonial-quote mb-4">"{{ item.quote }}"</p>
+            </div>
+
+            <div class="d-flex align-items-center gap-3 pt-3 border-top">
+              <img [src]="item.avatar" [alt]="item.name" class="testimonial-avatar" />
+              <div>
+                <div class="fw-bold text-dark small">{{ item.name }}</div>
+                <div class="text-muted extra-small">{{ item.role }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- =========================================================
+       BOTTOM CTA BANNER
+  ========================================================== -->
+  <section class="cta-banner my-5 p-4 p-md-5 text-center text-lg-start">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-8">
+        <span class="badge bg-white text-primary fw-bold px-3 py-2 rounded-pill mb-3">
+          Start Learning or Teaching Today
+        </span>
+        <h2 class="text-white fw-bold mb-2">Ready to Join the CourseHub Ecosystem?</h2>
+        <p class="text-white-50 mb-0">
+          Get unlimited access to structured learning paths, hands-on projects, and mentor support — or launch your own
+          course studio in minutes.
+        </p>
+      </div>
+      <div class="col-lg-4 d-flex flex-wrap justify-content-center justify-content-lg-end gap-3">
+        <a routerLink="/signup" target="_blank" class="btn-cta-white">
+          Create Free Account
+        </a>
+        <a routerLink="/become-instructor" class="btn-cta-outline">
+          Teach on CourseHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+</div>

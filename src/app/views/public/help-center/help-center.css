@@ -1,0 +1,77 @@
+/* =========================================================
+   HELP CENTER PAGE - BLUE ECOSYSTEM THEME
+========================================================= */
+
+.help-center-page {
+  font-family: 'Inter', sans-serif;
+}
+
+.help-hero {
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #0d6efd 100%);
+  border-radius: 22px;
+  padding: 44px 28px;
+  color: #ffffff;
+}
+
+.help-eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #93c5fd;
+}
+
+.help-title {
+  font-family: 'Outfit', 'Inter', sans-serif;
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 800;
+}
+
+.help-search {
+  max-width: 540px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.help-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  color: #0f172a;
+}
+
+.role-tab {
+  padding: 9px 18px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  color: #334155;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.role-tab.active {
+  background: #0d6efd;
+  border-color: #0d6efd;
+  color: #ffffff;
+}
+
+.faq-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 20px 24px;
+}
+
+.support-cta {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 16px;
+}
+

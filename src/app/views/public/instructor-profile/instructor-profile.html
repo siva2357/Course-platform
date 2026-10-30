@@ -1,1 +1,96 @@
-<p>instructor-profile works!</p>
+<div class="instructor-profile-page">
+
+  <!-- =========================================================
+       INSTRUCTOR HERO HEADER
+  ========================================================== -->
+  <section class="inst-hero mb-5">
+    <div class="row align-items-center g-4">
+      <div class="col-md-auto text-center">
+        <img [src]="instructor.avatar" [alt]="instructor.name" class="inst-hero-avatar" />
+      </div>
+
+      <div class="col-md">
+        <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+          <span class="inst-verified-pill">
+            <i class="bi bi-patch-check-fill me-1"></i>{{ instructor.badge }}
+          </span>
+          <span class="text-white-50 small">
+            <i class="bi bi-geo-alt-fill text-info me-1"></i>{{ instructor.location }}
+          </span>
+        </div>
+
+        <h1 class="inst-name mb-1">{{ instructor.name }}</h1>
+        <p class="inst-role mb-3">{{ instructor.title }}</p>
+
+        <!-- KPI Counters -->
+        <div class="d-flex flex-wrap gap-4">
+          <div class="inst-stat">
+            <div class="inst-stat-val"><i class="bi bi-star-fill text-warning me-1"></i>{{ instructor.rating }}</div>
+            <div class="inst-stat-lbl">{{ instructor.totalReviews }} Reviews</div>
+          </div>
+          <div class="inst-stat">
+            <div class="inst-stat-val">{{ instructor.totalStudents }}</div>
+            <div class="inst-stat-lbl">Total Learners</div>
+          </div>
+          <div class="inst-stat">
+            <div class="inst-stat-val">{{ instructor.totalCourses }}</div>
+            <div class="inst-stat-lbl">Published Courses</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       BIO + COURSES GRID
+  ========================================================== -->
+  <div class="row g-4">
+    <div class="col-lg-4">
+      <div class="inst-card mb-4">
+        <h2 class="h6 fw-bold text-dark mb-3">About the Instructor</h2>
+        <p class="text-muted small lh-lg mb-4">{{ instructor.bio }}</p>
+
+        <h3 class="h6 fw-bold text-dark mb-2">Core Expertise</h3>
+        <div class="d-flex flex-wrap gap-2">
+          @for (skill of instructor.expertise; track skill) {
+            <span class="skill-badge">{{ skill }}</span>
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-8">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="h5 fw-bold text-dark mb-0">Courses by {{ instructor.name }}</h2>
+        <a routerLink="/courses" class="text-primary small fw-semibold text-decoration-none">Browse All Catalog</a>
+      </div>
+
+      <div class="row g-4">
+        @for (course of instructor.courses; track course.id) {
+          <div class="col-md-6">
+            <div class="inst-course-card h-100 d-flex flex-column">
+              <img [src]="course.thumbnail" [alt]="course.title" class="inst-course-thumb" />
+              <div class="p-3 d-flex flex-column flex-grow-1">
+                <div class="d-flex justify-content-between align-items-center mb-2 small">
+                  <span class="badge bg-primary-subtle text-primary">{{ course.level }}</span>
+                  <span>
+                    <i class="bi bi-star-fill text-warning me-1"></i>
+                    <strong>{{ course.rating }}</strong> ({{ course.reviews }})
+                  </span>
+                </div>
+                <h3 class="h6 fw-bold mb-2">
+                  <a [routerLink]="['/courses', course.id]" class="text-dark text-decoration-none">{{ course.title }}</a>
+                </h3>
+                <div class="text-muted small mt-auto pt-2 border-top d-flex justify-content-between align-items-center">
+                  <span><i class="bi bi-clock text-primary me-1"></i>{{ course.duration }}</span>
+                  <span class="fw-bold text-dark fs-6">${{ course.price }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+
+</div>

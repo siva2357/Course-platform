@@ -1,1 +1,87 @@
-<p>pricing-and-plans works!</p>
+<div class="pricing-page">
+
+  <!-- =========================================================
+       HEADER & BILLING TOGGLE
+  ========================================================== -->
+  <section class="pricing-hero text-center mb-5">
+    <span class="pricing-eyebrow">Transparent Plans</span>
+    <h1 class="pricing-title mb-2">Invest in Your Career &amp; Team Growth</h1>
+    <p class="pricing-subtitle mx-auto mb-4">
+      Choose flexible individual course purchases or unlock the entire CourseHub catalog with a Pro membership.
+    </p>
+
+    <div class="billing-toggle d-inline-flex align-items-center p-1">
+      <button
+        type="button"
+        class="toggle-btn"
+        [class.active]="billingCycle === 'monthly'"
+        (click)="billingCycle = 'monthly'">
+        Monthly Billing
+      </button>
+      <button
+        type="button"
+        class="toggle-btn"
+        [class.active]="billingCycle === 'annual'"
+        (click)="billingCycle = 'annual'">
+        Annual Billing <span class="save-badge ms-1">Save 34%</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       PRICING CARDS
+  ========================================================== -->
+  <div class="row g-4 align-items-stretch mb-5">
+    @for (plan of plans; track plan.name) {
+      <div class="col-lg-4">
+        <div class="plan-card h-100 d-flex flex-column" [class.featured]="plan.featured">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h2 class="h5 fw-bold mb-0">{{ plan.name }}</h2>
+            <span class="plan-badge">{{ plan.badge }}</span>
+          </div>
+
+          <p class="small text-muted mb-4">{{ plan.description }}</p>
+
+          <div class="price-display mb-4">
+            <span class="currency">$</span>
+            <span class="amount">
+              {{ billingCycle === 'annual' ? plan.annualPrice : plan.monthlyPrice }}
+            </span>
+            <span class="period">/ member / month</span>
+          </div>
+
+          <ul class="list-unstyled d-flex flex-column gap-2 mb-4 flex-grow-1">
+            @for (feat of plan.features; track feat) {
+              <li class="d-flex align-items-start gap-2 small">
+                <i class="bi bi-check-circle-fill text-primary mt-1"></i>
+                <span>{{ feat }}</span>
+              </li>
+            }
+          </ul>
+
+          <a routerLink="/signup" target="_blank" class="btn-plan text-center" [class.btn-plan-primary]="plan.featured">
+            {{ plan.ctaLabel }}
+          </a>
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- =========================================================
+       PRICING FAQ
+  ========================================================== -->
+  <section class="faq-box p-4 p-md-5">
+    <h2 class="h4 fw-bold text-dark text-center mb-4">Frequently Asked Billing Questions</h2>
+    <div class="row g-4">
+      @for (item of faqs; track item.q) {
+        <div class="col-md-4">
+          <div class="faq-item h-100">
+            <h3 class="h6 fw-bold text-dark mb-2">{{ item.q }}</h3>
+            <p class="text-muted small mb-0">{{ item.a }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+
+</div>

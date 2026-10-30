@@ -1,1 +1,105 @@
-<p>signup-page works!</p>
+<main
+    class="signup-container d-flex flex-column align-items-center justify-content-center min-vh-100 position-relative">
+
+    <!-- Header -->
+    <header class="text-center mb-3 mt-2 z-1">
+        <img src="/logo 2.png" alt="Course Hub" class="logo mb-2">
+
+        <h1 class="fw-bold fs-3 text-dark mb-2">
+            Choose your role
+        </h1>
+
+        <p class="text-muted mb-0">
+            Select how you want to join the Course Hub learning ecosystem.
+        </p>
+    </header>
+
+    <!-- Role Selection -->
+    <section class="container z-1" aria-labelledby="role-selection-heading">
+
+        <div class="row justify-content-center g-4 mt-3 max-w-4xl mx-auto">
+
+            <!-- Learner -->
+            <div class="col-md-6 col-lg-5">
+                <button type="button" class="card role-card h-100 w-100 border-0 shadow-sm"
+                    [class.selected]="selectedRole === 'learner'" [attr.aria-pressed]="selectedRole === 'learner'"
+                    (click)="selectRole('learner')">
+
+                    @if (selectedRole === 'learner') {
+                    <span class="check-circle" aria-hidden="true">
+                        <i class="bi bi-check-circle-fill text-primary"></i>
+                    </span>
+                    }
+
+                    <div class="card-body text-center d-flex flex-column align-items-center">
+
+                        <div class="icon-wrapper mb-3 text-primary rounded-circle d-flex align-items-center justify-content-center"
+                            aria-hidden="true">
+                            <i class="bi bi-mortarboard-fill fs-1"></i>
+                        </div>
+
+                        <h3 class="fw-bold fs-5">
+                            Learner
+                        </h3>
+
+                        <p class="role-description text-muted small mb-0">
+                            Enroll in expert-led courses, follow guided career paths, and earn verified certificates
+                        </p>
+                    </div>
+                </button>
+            </div>
+
+            <!-- Instructor -->
+            <div class="col-md-6 col-lg-5">
+                <button type="button" class="card role-card h-100 w-100 border-0 shadow-sm"
+                    [class.selected]="selectedRole === 'instructor'" [attr.aria-pressed]="selectedRole === 'instructor'"
+                    (click)="selectRole('instructor')">
+
+                    @if (selectedRole === 'instructor') {
+                    <span class="check-circle" aria-hidden="true">
+                        <i class="bi bi-check-circle-fill text-primary"></i>
+                    </span>
+                    }
+
+                    <div class="card-body text-center d-flex flex-column align-items-center">
+
+                        <div class="icon-wrapper mb-3 text-primary rounded-circle d-flex align-items-center justify-content-center"
+                            aria-hidden="true">
+                            <i class="bi bi-easel2-fill fs-1"></i>
+                        </div>
+
+                        <h3 class="fw-bold fs-5">
+                            Instructor
+                        </h3>
+
+                        <p class="role-description text-muted small mb-0">
+                            Build interactive courses, mentor global learners, and grow your teaching revenue
+                        </p>
+                    </div>
+                </button>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Continue -->
+    @if (selectedRole) {
+    <div class="continue-btn-wrap text-center z-1 mb-3 mt-4">
+        <app-button variant="primary" size="md" [block]="true" label="Create Account" (clicked)="continue()">
+        </app-button>
+    </div>
+    }
+
+    <!-- Login -->
+    <p class="login-link text-center mt-3 mb-2 z-1">
+        <span class="text-muted small">
+            Already have an account?
+        </span>
+
+        <a routerLink="/login" class="text-primary fw-bold text-decoration-none small">
+            Log in
+        </a>
+    </p>
+
+</main>

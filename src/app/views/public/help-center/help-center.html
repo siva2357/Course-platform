@@ -1,1 +1,68 @@
-<p>help-center works!</p>
+<div class="help-center-page">
+
+  <!-- =========================================================
+       HERO SEARCH
+  ========================================================== -->
+  <section class="help-hero text-center mb-5">
+    <span class="help-eyebrow">24/7 Support Center</span>
+    <h1 class="help-title mb-3">How Can We Help You Today?</h1>
+    <div class="help-search mx-auto">
+      <i class="bi bi-search text-primary"></i>
+      <input
+        type="text"
+        [(ngModel)]="searchQuery"
+        placeholder="Search help articles, certificates, payouts, or billing..."
+        class="help-input" />
+    </div>
+  </section>
+
+  <!-- =========================================================
+       ROLE TABS + FAQ LIST
+  ========================================================== -->
+  <div class="d-flex justify-content-center gap-2 mb-4">
+    <button
+      type="button"
+      class="role-tab"
+      [class.active]="activeRoleTab === 'learner'"
+      (click)="activeRoleTab = 'learner'">
+      <i class="bi bi-mortarboard me-1"></i>Learner Help
+    </button>
+    <button
+      type="button"
+      class="role-tab"
+      [class.active]="activeRoleTab === 'instructor'"
+      (click)="activeRoleTab = 'instructor'">
+      <i class="bi bi-easel2 me-1"></i>Instructor Studio
+    </button>
+    <button
+      type="button"
+      class="role-tab"
+      [class.active]="activeRoleTab === 'billing'"
+      (click)="activeRoleTab = 'billing'">
+      <i class="bi bi-credit-card me-1"></i>Billing &amp; Refunds
+    </button>
+  </div>
+
+  <div class="row g-3 mb-5">
+    @for (item of faqs[activeRoleTab]; track item.q) {
+      <div class="col-12">
+        <div class="faq-card">
+          <h3 class="h6 fw-bold text-dark mb-2">
+            <i class="bi bi-question-circle-fill text-primary me-2"></i>{{ item.q }}
+          </h3>
+          <p class="text-muted small mb-0">{{ item.a }}</p>
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- Contact Support Banner -->
+  <section class="support-cta text-center p-4">
+    <h2 class="h5 fw-bold text-dark mb-1">Still Need Assistance?</h2>
+    <p class="text-muted small mb-3">Our support engineers and academic advisors respond within 4 hours.</p>
+    <a href="mailto:support@coursehub.io" class="btn btn-primary btn-sm px-4">
+      <i class="bi bi-envelope-fill me-1"></i>Contact Support Team
+    </a>
+  </section>
+
+</div>

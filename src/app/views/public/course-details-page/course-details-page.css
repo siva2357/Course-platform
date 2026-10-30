@@ -1,0 +1,266 @@
+/* =========================================================
+   COURSE DETAILS PAGE - BLUE ECOSYSTEM THEME
+========================================================= */
+
+.course-details-page {
+  font-family: 'Inter', sans-serif;
+}
+
+.details-hero {
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #0d6efd 100%);
+  border-radius: 22px;
+  padding: 40px 36px;
+  color: #ffffff;
+}
+
+.breadcrumb-link {
+  color: #93c5fd;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.breadcrumb-link:hover {
+  color: #ffffff;
+}
+
+.hero-cat-badge {
+  background: rgba(56, 189, 248, 0.18);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  color: #e0f2fe;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+.hero-level-badge {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+.details-title {
+  font-family: 'Outfit', 'Inter', sans-serif;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.details-subtitle {
+  color: #cbd5e1;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.hero-inst-avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #38bdf8;
+}
+
+.extra-small {
+  font-size: 11.5px;
+}
+
+/* Tabs */
+.details-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 10px;
+}
+
+.tab-btn {
+  padding: 8px 18px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: #475569;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.tab-btn.active {
+  background: #eff6ff;
+  color: #0d6efd;
+}
+
+/* Content Cards */
+.content-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.module-box {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.module-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 18px;
+  background: #f8fafc;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.module-lessons {
+  padding: 8px 18px;
+  background: #ffffff;
+}
+
+.lesson-row {
+  padding: 10px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.lesson-row:last-child {
+  border-bottom: none;
+}
+
+.preview-badge {
+  background: #eff6ff;
+  color: #0d6efd;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+.inst-profile-lg {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.review-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+/* Sticky Enroll Card */
+.enroll-sidebar-card {
+  background: #ffffff;
+  border: 1px solid #dbeafe;
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
+  position: sticky;
+  top: 88px;
+}
+
+.preview-video-box {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  height: 195px;
+}
+
+.preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.play-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.play-btn-circle {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #0d6efd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.preview-caption {
+  color: #ffffff;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.enroll-price {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.enroll-old-price {
+  font-size: 1rem;
+  color: #94a3b8;
+  text-decoration: line-through;
+}
+
+.discount-pill {
+  background: #dbeafe;
+  color: #1d4ed8;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.btn-buy-primary {
+  padding: 12px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #0d6efd 0%, #0d99fd 100%);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 14.5px;
+  text-decoration: none;
+}
+
+.btn-buy-primary:hover {
+  color: #ffffff;
+  opacity: 0.95;
+}
+
+.btn-wishlist {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #334155;
+  font-weight: 600;
+  font-size: 13.5px;
+  text-decoration: none;
+}
+
+.btn-wishlist:hover {
+  background: #f8fafc;
+  color: #0d6efd;
+  border-color: #93c5fd;
+}
+

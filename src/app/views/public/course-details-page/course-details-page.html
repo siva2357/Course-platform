@@ -1,1 +1,257 @@
-<p>course-details-page works!</p>
+<div class="course-details-page">
+
+  <!-- =========================================================
+       TOP HERO HEADER
+  ========================================================== -->
+  <section class="details-hero mb-5">
+    <div class="row g-4 align-items-center">
+      <div class="col-lg-8">
+        <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+          <a routerLink="/courses" class="breadcrumb-link">
+            <i class="bi bi-arrow-left me-1"></i>All Courses
+          </a>
+          <span class="text-white-50">/</span>
+          <span class="hero-cat-badge">{{ course.category }}</span>
+          <span class="hero-level-badge">{{ course.level }}</span>
+        </div>
+
+        <h1 class="details-title mb-3">{{ course.title }}</h1>
+        <p class="details-subtitle mb-4">{{ course.subtitle }}</p>
+
+        <!-- Ratings & Stats -->
+        <div class="d-flex flex-wrap align-items-center gap-4 mb-4 text-white small">
+          <div class="d-flex align-items-center gap-1">
+            <span class="fw-bold text-warning fs-6">{{ course.rating }}</span>
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star-fill text-warning"></i>
+            <span class="text-white-50 ms-1">({{ course.reviewsCount }} verified reviews)</span>
+          </div>
+          <span><i class="bi bi-people-fill text-info me-1"></i>{{ course.studentsCount }} enrolled</span>
+          <span><i class="bi bi-calendar3 text-info me-1"></i>Updated {{ course.lastUpdated }}</span>
+          <span><i class="bi bi-globe text-info me-1"></i>{{ course.language }}</span>
+        </div>
+
+        <!-- Instructor Mini -->
+        <div class="d-flex align-items-center gap-3">
+          <img [src]="course.instructor.avatar" [alt]="course.instructor.name" class="hero-inst-avatar" />
+          <div>
+            <div class="text-white-50 extra-small">Created &amp; Mentored by</div>
+            <a [routerLink]="['/instructors', course.instructor.id]" class="text-white fw-bold text-decoration-none">
+              {{ course.instructor.name }} <i class="bi bi-patch-check-fill text-info ms-1"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       MAIN CONTENT + STICKY ENROLLMENT CARD
+  ========================================================== -->
+  <div class="row g-4">
+
+    <!-- Left Content Column -->
+    <div class="col-lg-8">
+
+      <!-- Navigation Tabs -->
+      <div class="details-tabs mb-4">
+        <button
+          type="button"
+          class="tab-btn"
+          [class.active]="activeTab === 'overview'"
+          (click)="activeTab = 'overview'">
+          Overview
+        </button>
+        <button
+          type="button"
+          class="tab-btn"
+          [class.active]="activeTab === 'curriculum'"
+          (click)="activeTab = 'curriculum'">
+          Curriculum ({{ course.lessonsCount }})
+        </button>
+        <button
+          type="button"
+          class="tab-btn"
+          [class.active]="activeTab === 'instructor'"
+          (click)="activeTab = 'instructor'">
+          Instructor
+        </button>
+        <button
+          type="button"
+          class="tab-btn"
+          [class.active]="activeTab === 'reviews'"
+          (click)="activeTab = 'reviews'">
+          Reviews
+        </button>
+      </div>
+
+      <!-- What You Will Learn Box -->
+      @if (activeTab === 'overview') {
+        <div class="content-card mb-4">
+          <h2 class="h5 fw-bold text-dark mb-3">
+            <i class="bi bi-lightbulb-fill text-primary me-2"></i>What You'll Master in This Course
+          </h2>
+          <div class="row g-3">
+            @for (outcome of course.outcomes; track outcome) {
+              <div class="col-md-6">
+                <div class="d-flex align-items-start gap-2 small text-dark">
+                  <i class="bi bi-check-circle-fill text-primary mt-1 flex-shrink-0"></i>
+                  <span>{{ outcome }}</span>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      }
+
+      <!-- Course Curriculum Accordion -->
+      <div class="content-card mb-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h2 class="h5 fw-bold text-dark mb-0">
+            <i class="bi bi-journal-code text-primary me-2"></i>Course Syllabus &amp; Curriculum
+          </h2>
+          <span class="text-muted small">{{ course.curriculum.length }} Modules • {{ course.duration }} total</span>
+        </div>
+
+        <div class="curriculum-list d-flex flex-column gap-3">
+          @for (module of course.curriculum; track module.title; let idx = $index) {
+            <div class="module-box">
+              <button
+                type="button"
+                class="module-header"
+                (click)="toggleSection(idx)">
+                <div class="d-flex align-items-center gap-2">
+                  <i class="bi" [class]="openSectionIndex === idx ? 'bi-chevron-down text-primary' : 'bi-chevron-right'"></i>
+                  <span class="fw-bold text-dark">{{ module.title }}</span>
+                </div>
+                <span class="text-muted small">{{ module.meta }}</span>
+              </button>
+
+              @if (openSectionIndex === idx) {
+                <div class="module-lessons">
+                  @for (lesson of module.lessons; track lesson.title) {
+                    <div class="lesson-row d-flex justify-content-between align-items-center">
+                      <div class="d-flex align-items-center gap-2 small">
+                        <i class="bi bi-play-circle-fill text-primary"></i>
+                        <span class="text-dark">{{ lesson.title }}</span>
+                      </div>
+                      <div class="d-flex align-items-center gap-3">
+                        @if (lesson.preview) {
+                          <span class="preview-badge">Free Preview</span>
+                        }
+                        <span class="text-muted extra-small">{{ lesson.duration }}</span>
+                      </div>
+                    </div>
+                  }
+                </div>
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Instructor Bio Card -->
+      <div class="content-card mb-4">
+        <h2 class="h5 fw-bold text-dark mb-3">
+          <i class="bi bi-person-badge-fill text-primary me-2"></i>Your Instructor
+        </h2>
+        <div class="d-flex flex-column flex-sm-row align-items-start gap-4">
+          <img [src]="course.instructor.avatar" [alt]="course.instructor.name" class="inst-profile-lg" />
+          <div>
+            <h3 class="h6 fw-bold mb-1">
+              <a [routerLink]="['/instructors', course.instructor.id]" class="text-dark text-decoration-none">
+                {{ course.instructor.name }}
+              </a>
+            </h3>
+            <p class="text-primary small fw-semibold mb-2">{{ course.instructor.role }}</p>
+            <div class="d-flex flex-wrap gap-3 text-muted small mb-3">
+              <span><i class="bi bi-star-fill text-warning me-1"></i>{{ course.instructor.rating }} Instructor Rating</span>
+              <span><i class="bi bi-people-fill text-primary me-1"></i>{{ course.instructor.students }} Learners</span>
+              <span><i class="bi bi-play-btn-fill text-primary me-1"></i>{{ course.instructor.courses }} Courses</span>
+            </div>
+            <p class="text-muted small mb-3">{{ course.instructor.bio }}</p>
+            <a [routerLink]="['/instructors', course.instructor.id]" class="btn btn-outline-primary btn-sm">
+              View Full Instructor Profile
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Student Reviews -->
+      <div class="content-card">
+        <h2 class="h5 fw-bold text-dark mb-3">
+          <i class="bi bi-chat-quote-fill text-primary me-2"></i>Learner Reviews
+        </h2>
+        <div class="row g-3">
+          @for (rev of course.reviews; track rev.name) {
+            <div class="col-md-6">
+              <div class="review-box h-100">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <div>
+                    <div class="fw-bold text-dark small">{{ rev.name }}</div>
+                    <div class="text-muted extra-small">{{ rev.role }}</div>
+                  </div>
+                  <span class="text-muted extra-small">{{ rev.date }}</span>
+                </div>
+                <div class="text-warning small mb-2">
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                </div>
+                <p class="text-muted small mb-0">"{{ rev.comment }}"</p>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right Sticky Purchase Card -->
+    <div class="col-lg-4">
+      <aside class="enroll-sidebar-card">
+        <div class="preview-video-box mb-3">
+          <img [src]="course.thumbnail" [alt]="course.title" class="preview-img" />
+          <div class="play-overlay">
+            <div class="play-btn-circle">
+              <i class="bi bi-play-fill"></i>
+            </div>
+            <span class="preview-caption">Preview this course</span>
+          </div>
+        </div>
+
+        <div class="d-flex align-items-baseline gap-2 mb-3">
+          <span class="enroll-price">${{ course.price }}</span>
+          <span class="enroll-old-price">${{ course.originalPrice }}</span>
+          <span class="discount-pill ms-auto">{{ course.discount }}</span>
+        </div>
+
+        <div class="d-grid gap-2 mb-4">
+          <a routerLink="/signup" target="_blank" class="btn-buy-primary text-center">
+            Enroll Now
+          </a>
+          <a routerLink="/login" target="_blank" class="btn-wishlist text-center">
+            <i class="bi bi-bookmark-heart me-1"></i> Save to Wishlist
+          </a>
+        </div>
+
+        <div class="includes-list border-top pt-3">
+          <div class="fw-bold text-dark small mb-2">This course includes:</div>
+          <ul class="list-unstyled d-flex flex-column gap-2 small text-muted mb-0">
+            <li><i class="bi bi-camera-video text-primary me-2"></i>{{ course.duration }} on-demand HD video</li>
+            <li><i class="bi bi-code-square text-primary me-2"></i>{{ course.projectsCount }} real-world capstone projects</li>
+            <li><i class="bi bi-file-earmark-arrow-down text-primary me-2"></i>Downloadable source code &amp; slides</li>
+            <li><i class="bi bi-chat-dots text-primary me-2"></i>Direct instructor Q&amp;A discussion forum</li>
+            <li><i class="bi bi-patch-check text-primary me-2"></i>Verified Certificate of Completion</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+
+  </div>
+</div>

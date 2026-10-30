@@ -1,1 +1,167 @@
-<p>about-us works!</p>
+<div class="about-page">
+
+  <!-- =========================================================
+       HERO SECTION WITH IMAGE
+  ========================================================== -->
+  <section class="about-hero mb-5">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-6">
+        <span class="about-eyebrow">Our Mission &amp; Story</span>
+        <h1 class="about-title mb-3">
+          Building the Future of Collaborative Technical Learning
+        </h1>
+        <p class="about-subtitle mb-4">
+          CourseHub was founded to bridge the gap between textbook theory and production engineering by connecting
+          ambitious <strong>Learners</strong>, expert <strong>Instructors</strong>, and modern
+          <strong>Organizations</strong> in one unified ecosystem.
+        </p>
+        <div class="d-flex flex-wrap gap-3">
+          <a routerLink="/courses" class="btn-about-white">
+            Explore Courses <i class="bi bi-arrow-right ms-1"></i>
+          </a>
+          <a routerLink="/become-instructor" class="btn-about-outline">
+            Become an Instructor
+          </a>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="about-hero-visual">
+          <img
+            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=85"
+            alt="CourseHub team collaborating on learning platform"
+            class="about-hero-img" />
+          <div class="about-floating-badge">
+            <div class="badge-icon">
+              <i class="bi bi-globe2"></i>
+            </div>
+            <div>
+              <div class="fw-bold text-dark small">125,000+ Learners in 140+ Countries</div>
+              <div class="text-muted extra-small">Learning together every single day</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       OUR STORY + VISUAL COLLAGE & STATS
+  ========================================================== -->
+  <section class="my-5">
+    <div class="row g-4 align-items-center">
+      <div class="col-lg-6">
+        <div class="story-image-grid">
+          <img
+            src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80"
+            alt="Students learning together"
+            class="story-img-main" />
+          <div class="row g-3 mt-1">
+            <div class="col-6">
+              <img
+                src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80"
+                alt="Hands-on coding lab"
+                class="story-img-sub" />
+            </div>
+            <div class="col-6">
+              <img
+                src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=600&q=80"
+                alt="Instructor mentoring session"
+                class="story-img-sub" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <span class="section-tag">Why We Created CourseHub</span>
+        <h2 class="h3 fw-bold text-dark mt-1 mb-3">More Than Video Lectures — A Complete Skill Ecosystem</h2>
+        <p class="text-muted mb-4">
+          Traditional platforms treat online education like passive video streaming. At CourseHub, we built a hands-on
+          ecosystem where <strong>Learners</strong> build real capstones, <strong>Instructors</strong> use studio-grade
+          curriculum &amp; analytics tools, and <strong>Admins</strong> uphold strict course quality standards.
+        </p>
+
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="about-stat-card">
+              <div class="fs-3 fw-bold text-primary">125K+</div>
+              <div class="text-muted small">Global Learners</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="about-stat-card">
+              <div class="fs-3 fw-bold text-primary">350+</div>
+              <div class="text-muted small">Verified Mentors</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="about-stat-card">
+              <div class="fs-3 fw-bold text-primary">94%</div>
+              <div class="text-muted small">Career Outcome Rate</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="about-stat-card">
+              <div class="fs-3 fw-bold text-primary">4.9/5</div>
+              <div class="text-muted small">Average Rating</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       CORE PRINCIPLES WITH IMAGES
+  ========================================================== -->
+  <section class="my-5 pt-2">
+    <div class="text-center mb-4">
+      <span class="section-tag">What Drives Us</span>
+      <h2 class="h3 fw-bold text-dark mt-1">Our Core Ecosystem Principles</h2>
+    </div>
+
+    <div class="row g-4">
+      @for (val of values; track val.title) {
+        <div class="col-md-4">
+          <div class="value-card h-100 d-flex flex-column">
+            <div class="value-img-wrap">
+              <img [src]="val.image" [alt]="val.title" class="value-img" />
+              <div class="value-icon-floating">
+                <i class="bi" [class]="val.icon"></i>
+              </div>
+            </div>
+            <div class="p-4 flex-grow-1">
+              <h3 class="h5 fw-bold text-dark mb-2">{{ val.title }}</h3>
+              <p class="text-muted small mb-0">{{ val.desc }}</p>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- =========================================================
+       LEADERSHIP TEAM
+  ========================================================== -->
+  <section class="leadership-section my-5 p-4 p-md-5">
+    <div class="text-center mb-4">
+      <span class="section-tag">Leadership Team</span>
+      <h2 class="h3 fw-bold text-dark mt-1">Meet the Builders Behind CourseHub</h2>
+    </div>
+
+    <div class="row g-4">
+      @for (member of leadership; track member.name) {
+        <div class="col-md-4">
+          <div class="leader-card h-100 text-center">
+            <img [src]="member.avatar" [alt]="member.name" class="leader-avatar mb-3" />
+            <h3 class="h6 fw-bold text-dark mb-1">{{ member.name }}</h3>
+            <p class="text-primary small fw-semibold mb-2">{{ member.role }}</p>
+            <p class="text-muted small mb-0">{{ member.bio }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+
+</div>

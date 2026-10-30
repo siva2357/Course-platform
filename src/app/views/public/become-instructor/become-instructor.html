@@ -1,1 +1,146 @@
-<p>become-instructor works!</p>
+<div class="become-instructor-page">
+
+  <!-- =========================================================
+       HERO SECTION WITH INSTRUCTOR IMAGE & OVERLAY CARDS
+  ========================================================== -->
+  <section class="teach-hero mb-5">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-6">
+        <span class="teach-eyebrow">CourseHub Creator Studio</span>
+        <h1 class="teach-title mb-3">
+          Share Your Expertise. Inspire 125,000+ Learners Worldwide.
+        </h1>
+        <p class="teach-subtitle mb-4">
+          Join our verified network of industry engineers, scientists, and design leaders. Build interactive courses,
+          grow your professional brand, and earn recurring revenue.
+        </p>
+        <div class="d-flex flex-wrap gap-3">
+          <a routerLink="/signup" target="_blank" class="btn-teach-primary">
+            Start Teaching Today <i class="bi bi-arrow-right ms-1"></i>
+          </a>
+          <a routerLink="/courses" class="btn-teach-outline">
+            Explore Creator Courses
+          </a>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="teach-hero-visual">
+          <img
+            src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1000&q=85"
+            alt="Instructor teaching online course on CourseHub"
+            class="teach-hero-img" />
+
+          <!-- Floating Earnings Card -->
+          <div class="teach-floating-card card-top-right">
+            <div class="float-icon bg-primary-subtle text-primary">
+              <i class="bi bi-cash-stack"></i>
+            </div>
+            <div>
+              <div class="text-muted extra-small">Avg. Top Mentor Payout</div>
+              <div class="fw-bold text-dark">$8,420 / month</div>
+            </div>
+          </div>
+
+          <!-- Floating Learners Card -->
+          <div class="teach-floating-card card-bottom-left">
+            <div class="float-icon bg-info-subtle text-primary">
+              <i class="bi bi-people-fill"></i>
+            </div>
+            <div>
+              <div class="fw-bold text-dark small">125,000+ Active Learners</div>
+              <div class="text-muted extra-small">Global reach across 140+ countries</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       WHY TEACH ON COURSEHUB (CARDS WITH IMAGES)
+  ========================================================== -->
+  <section class="my-5">
+    <div class="text-center mb-4">
+      <span class="section-tag">Why Teach With Us</span>
+      <h2 class="h3 fw-bold text-dark mt-1">Everything You Need to Build World-Class Courses</h2>
+    </div>
+
+    <div class="row g-4">
+      @for (item of benefits; track item.title) {
+        <div class="col-md-4">
+          <div class="benefit-card h-100 d-flex flex-column">
+            <div class="benefit-img-wrap">
+              <img [src]="item.image" [alt]="item.title" class="benefit-img" />
+              <div class="benefit-icon-badge">
+                <i class="bi" [class]="item.icon"></i>
+              </div>
+            </div>
+            <div class="p-4 flex-grow-1">
+              <h3 class="h5 fw-bold text-dark mb-2">{{ item.title }}</h3>
+              <p class="text-muted small mb-0">{{ item.description }}</p>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- =========================================================
+       4-STEP ONBOARDING WORKFLOW
+  ========================================================== -->
+  <section class="workflow-section my-5 p-4 p-md-5">
+    <div class="text-center mb-4">
+      <span class="section-tag">Simple 4-Step Launch</span>
+      <h2 class="h3 fw-bold text-dark mt-1">How Instructor Onboarding Works</h2>
+    </div>
+
+    <div class="row g-4">
+      @for (s of steps; track s.step) {
+        <div class="col-md-6 col-lg-3">
+          <div class="step-card h-100">
+            <div class="step-number mb-2">{{ s.step }}</div>
+            <h3 class="h6 fw-bold text-dark mb-2">{{ s.title }}</h3>
+            <p class="text-muted small mb-0">{{ s.description }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- =========================================================
+       INSTRUCTOR SUCCESS STORIES WITH PHOTOS
+  ========================================================== -->
+  <section class="my-5">
+    <div class="text-center mb-4">
+      <span class="section-tag">Creator Stories</span>
+      <h2 class="h3 fw-bold text-dark mt-1">Hear From Our Top CourseHub Mentors</h2>
+    </div>
+
+    <div class="row g-4">
+      @for (story of mentorStories; track story.id) {
+        <div class="col-md-6">
+          <div class="mentor-story-card h-100 d-flex flex-column justify-content-between">
+            <p class="text-muted small fst-italic mb-4">"{{ story.quote }}"</p>
+
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 pt-3 border-top">
+              <a [routerLink]="['/instructors', story.id]" class="d-flex align-items-center gap-3 text-decoration-none">
+                <img [src]="story.avatar" [alt]="story.name" class="mentor-story-avatar" />
+                <div>
+                  <div class="fw-bold text-dark small">{{ story.name }}</div>
+                  <div class="text-primary extra-small fw-semibold">{{ story.role }}</div>
+                </div>
+              </a>
+
+              <div class="d-flex gap-2">
+                <span class="badge bg-primary-subtle text-primary">{{ story.earnings }}</span>
+                <span class="badge bg-light text-dark border">{{ story.students }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+
+</div>

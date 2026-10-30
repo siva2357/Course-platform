@@ -1,0 +1,698 @@
+/* =========================================================
+   TALENT HUB REGISTER
+   SAME STYLE AS LOGIN
+========================================================= */
+
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+.register-layout {
+    width: 100%;
+
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    margin: 0;
+    padding: 0;
+
+    background: #ffffff;
+
+    overflow-x: hidden;
+
+    font-family: 'Inter', 'Outfit', sans-serif;
+}
+
+.register-layout *,
+.register-layout *::before,
+.register-layout *::after {
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   ROW
+========================================================= */
+
+.register-layout>.row {
+    width: 100%;
+
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    margin: 0;
+}
+
+
+/* =========================================================
+   LEFT REGISTER PANEL
+========================================================= */
+
+.left-panel {
+    position: relative;
+
+    width: 100%;
+
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 0 !important;
+
+    background: #ffffff;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+
+/* =========================================================
+   BACK LINK
+========================================================= */
+
+.back-link {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    margin: 24px;
+
+    z-index: 5;
+
+    font-size: 0.8rem;
+}
+
+.back-link:hover {
+    text-decoration: underline !important;
+}
+
+
+/* =========================================================
+   FORM CONTAINER
+========================================================= */
+
+.form-container {
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+    max-width: 430px;
+
+    margin: auto;
+
+    padding: 30px 24px;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.form-container header {
+    width: 100%;
+
+    margin-bottom: 30px;
+}
+
+.form-container header h1 {
+    line-height: 1.3;
+
+    letter-spacing: -0.02em;
+}
+
+.form-container header p {
+    line-height: 1.55;
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.logo {
+    display: block;
+
+    width: auto;
+
+    height: 70px;
+
+    max-width: 220px;
+
+    object-fit: contain;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.static-form {
+    width: 100%;
+}
+
+.static-form app-input-field,
+.static-form app-button {
+    display: block;
+
+    width: 100%;
+}
+
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+.input-group-text {
+    transition:
+        border-color 0.15s ease-in-out,
+        background-color 0.15s ease-in-out;
+}
+
+.form-control:focus {
+    border-color: #4a3aff;
+
+    box-shadow: none;
+}
+
+.input-group:focus-within .input-group-text,
+.input-group:focus-within .form-control {
+    border-color: #4a3aff;
+}
+
+
+/* =========================================================
+   COLORS
+========================================================= */
+
+.text-primary {
+    color: #4a3aff !important;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   PRIMARY BUTTON
+========================================================= */
+
+.btn-primary {
+    background:
+        linear-gradient(135deg,
+            #4a3aff,
+            #2563eb);
+
+    border: none;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(74, 58, 255, 0.35);
+
+    background:
+        linear-gradient(135deg,
+            #3f31eb,
+            #1d4ed8);
+}
+
+
+/* =========================================================
+   RIGHT IMAGE COLUMN
+========================================================= */
+
+.right-column {
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    padding: 16px !important;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   IMAGE PLACEHOLDER
+========================================================= */
+
+.image-placeholder {
+    position: relative;
+
+    width: 100%;
+
+    height: calc(100dvh - 32px);
+
+    overflow: hidden;
+
+    border-radius: 24px;
+
+    background: #f5f6fa;
+}
+
+
+/* =========================================================
+   IMAGE
+========================================================= */
+
+.banner-image {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    object-position: center;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.image-placeholder:hover .banner-image {
+    transform: scale(1.03);
+}
+
+.banner-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+            rgba(15, 23, 42, 0) 30%,
+            rgba(15, 23, 42, 0.4) 60%,
+            rgba(15, 23, 42, 0.88) 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.banner-floating-content {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    right: 24px;
+    z-index: 2;
+    padding: 22px 26px;
+    background: rgba(15, 23, 42, 0.65);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 18px;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.image-placeholder:hover .banner-floating-content {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.badge-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 14px;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+
+/* =========================================================
+   DESKTOP
+   1200px+
+========================================================= */
+
+@media (min-width: 1200px) {
+
+    .register-layout>.row {
+        display: flex;
+
+        width: 100%;
+
+        min-height: 100dvh;
+    }
+
+    /* LEFT 50% */
+
+    .register-layout>.row>.left-panel {
+        flex: 0 0 50%;
+
+        max-width: 50%;
+        width: 50%;
+
+        min-height: 100dvh;
+
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* RIGHT 50% */
+
+    .register-layout>.row>.right-column {
+        display: flex !important;
+
+        flex: 0 0 50%;
+
+        max-width: 50%;
+        width: 50%;
+
+        min-height: 100dvh;
+
+        padding: 16px !important;
+    }
+
+    .form-container {
+        max-width: 430px;
+    }
+
+    .image-placeholder {
+        height: calc(100dvh - 32px);
+
+        border-radius: 24px;
+    }
+}
+
+
+/* =========================================================
+   LAPTOP
+   992px - 1199px
+
+   FORM ONLY
+========================================================= */
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+
+    .left-panel {
+        flex: 0 0 100%;
+
+        max-width: 100%;
+        width: 100%;
+
+        min-height: 100dvh;
+
+        justify-content: center;
+        align-items: center;
+    }
+
+    .right-column {
+        display: none !important;
+    }
+
+    .form-container {
+        max-width: 430px;
+    }
+
+    .logo {
+        height: 62px;
+    }
+}
+
+
+/* =========================================================
+   TABLET
+   768px - 991px
+
+   FORM ONLY
+========================================================= */
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+
+    .left-panel {
+        flex: 0 0 100%;
+
+        max-width: 100%;
+        width: 100%;
+
+        min-height: 100dvh;
+
+        justify-content: center;
+        align-items: center;
+    }
+
+    .right-column {
+        display: none !important;
+    }
+
+    .form-container {
+        width: 100%;
+
+        max-width: 520px;
+
+        padding: 40px 28px;
+    }
+
+    .logo {
+        height: 65px;
+    }
+
+    .back-link {
+        margin: 20px !important;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   < 768px
+========================================================= */
+
+@media (max-width: 767.98px) {
+
+    .register-layout {
+        min-height: 100dvh;
+
+        height: auto;
+    }
+
+    .register-layout>.row {
+        min-height: 100dvh;
+
+        height: auto;
+    }
+
+    .left-panel {
+        width: 100%;
+
+        flex: 0 0 100%;
+
+        max-width: 100%;
+
+        min-height: 100dvh;
+
+        height: auto;
+
+        justify-content: center;
+        align-items: center;
+
+        padding: 0 !important;
+
+        overflow: visible;
+    }
+
+    /* Hide image */
+
+    .right-column {
+        display: none !important;
+    }
+
+    /* Back */
+
+    .back-link {
+        position: absolute;
+
+        top: 0;
+        left: 0;
+
+        margin: 18px 16px !important;
+
+        font-size: 0.78rem;
+    }
+
+    /* Form */
+
+    .form-container {
+        width: 100%;
+
+        max-width: 430px;
+
+        margin: auto;
+
+        padding: 75px 20px 30px;
+    }
+
+    /* Header */
+
+    .form-container header {
+        margin-bottom: 30px;
+    }
+
+    .logo {
+        height: 58px;
+
+        max-width: 190px;
+
+        margin-bottom: 12px !important;
+    }
+
+    .form-container header h1 {
+        font-size: 1.45rem !important;
+
+        margin-bottom: 7px;
+    }
+
+    .form-container header p {
+        font-size: 0.82rem;
+
+        max-width: 320px;
+
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Form spacing */
+
+    .static-form .mb-3 {
+        margin-bottom: 16px !important;
+    }
+
+    .static-form .mb-4 {
+        margin-bottom: 20px !important;
+    }
+
+    .static-form>.text-center {
+        margin-top: 28px !important;
+
+        padding-bottom: 10px !important;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   < 576px
+========================================================= */
+
+@media (max-width: 575.98px) {
+
+    .back-link {
+        margin: 16px 14px !important;
+
+        font-size: 0.75rem;
+    }
+
+    .form-container {
+        max-width: 100%;
+
+        padding: 70px 16px 25px;
+    }
+
+    .form-container header {
+        margin-bottom: 25px;
+    }
+
+    .logo {
+        height: 52px;
+
+        max-width: 175px;
+    }
+
+    .form-container header h1 {
+        font-size: 1.3rem !important;
+    }
+
+    .form-container header p {
+        font-size: 0.78rem;
+    }
+
+    .static-form .mb-3 {
+        margin-bottom: 14px !important;
+    }
+
+    .static-form .mb-4 {
+        margin-bottom: 18px !important;
+    }
+
+    .static-form>.text-center {
+        margin-top: 24px !important;
+    }
+
+    .static-form .alert {
+        font-size: 0.76rem;
+
+        line-height: 1.45;
+
+        word-break: break-word;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+   <= 375px
+========================================================= */
+
+@media (max-width: 375px) {
+
+    .back-link {
+        margin: 14px 12px !important;
+
+        font-size: 0.7rem;
+    }
+
+    .form-container {
+        padding-left: 13px;
+        padding-right: 13px;
+    }
+
+    .form-container header {
+        margin-bottom: 22px;
+    }
+
+    .logo {
+        height: 46px;
+
+        max-width: 155px;
+    }
+
+    .form-container header h1 {
+        font-size: 1.2rem !important;
+    }
+
+    .form-container header p {
+        font-size: 0.74rem;
+    }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+.back-link:focus-visible {
+    outline: 2px solid rgba(74, 58, 255, 0.3);
+
+    outline-offset: 3px;
+
+    border-radius: 4px;
+}

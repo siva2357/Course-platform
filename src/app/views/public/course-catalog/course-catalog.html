@@ -1,1 +1,195 @@
-<p>course-catalog works!</p>
+<div class="catalog-page">
+
+  <!-- =========================================================
+       CATALOG HEADER BANNER
+  ========================================================== -->
+  <section class="catalog-hero mb-4">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-7">
+        <span class="catalog-eyebrow">CourseHub Catalog</span>
+        <h1 class="catalog-title mb-2">Explore Industry-Ready Courses</h1>
+        <p class="catalog-subtitle mb-0">
+          Filter by skill track, difficulty level, or instructor to find the right hands-on course for your career goals.
+        </p>
+      </div>
+      <div class="col-lg-5">
+        <div class="catalog-search-box">
+          <i class="bi bi-search text-primary"></i>
+          <input
+            type="text"
+            [(ngModel)]="searchQuery"
+            placeholder="Search courses by title, technology, or topic..."
+            class="catalog-search-input" />
+          @if (searchQuery) {
+            <button type="button" class="btn-clear" (click)="searchQuery = ''">
+              <i class="bi bi-x-lg"></i>
+            </button>
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       MAIN FILTER + RESULTS GRID
+  ========================================================== -->
+  <div class="row g-4">
+
+    <!-- Left Filter Sidebar -->
+    <div class="col-lg-3">
+      <aside class="filter-sidebar">
+        <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
+          <h2 class="h6 fw-bold mb-0 text-dark">
+            <i class="bi bi-sliders me-2 text-primary"></i>Filters
+          </h2>
+          <button type="button" class="btn-reset" (click)="resetFilters()">Reset All</button>
+        </div>
+
+        <!-- Category Filter -->
+        <div class="filter-group mb-4">
+          <label class="filter-label">Category</label>
+          <div class="d-flex flex-column gap-1">
+            @for (cat of categories; track cat) {
+              <button
+                type="button"
+                class="filter-option"
+                [class.active]="selectedCategory === cat"
+                (click)="selectedCategory = cat">
+                <span>{{ cat }}</span>
+                @if (selectedCategory === cat) {
+                  <i class="bi bi-check2 text-primary fw-bold"></i>
+                }
+              </button>
+            }
+          </div>
+        </div>
+
+        <!-- Level Filter -->
+        <div class="filter-group mb-4">
+          <label class="filter-label">Difficulty Level</label>
+          <div class="d-flex flex-wrap gap-2">
+            @for (lvl of levels; track lvl) {
+              <button
+                type="button"
+                class="level-chip"
+                [class.active]="selectedLevel === lvl"
+                (click)="selectedLevel = lvl">
+                {{ lvl }}
+              </button>
+            }
+          </div>
+        </div>
+
+        <!-- Price Filter -->
+        <div class="filter-group">
+          <label class="filter-label">Price Tier</label>
+          <div class="d-flex gap-2">
+            @for (tier of ['All', 'Paid', 'Free']; track tier) {
+              <button
+                type="button"
+                class="level-chip flex-fill"
+                [class.active]="selectedPrice === tier"
+                (click)="selectedPrice = tier">
+                {{ tier }}
+              </button>
+            }
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Right Course Listing -->
+    <div class="col-lg-9">
+
+      <!-- Toolbar -->
+      <div class="catalog-toolbar d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
+        <div class="text-muted small">
+          Showing <strong class="text-dark">{{ filteredCourses.length }}</strong> courses
+          @if (selectedCategory !== 'All') {
+            in <span class="badge bg-primary-subtle text-primary">{{ selectedCategory }}</span>
+          }
+        </div>
+
+        <div class="d-flex align-items-center gap-2">
+          <span class="text-muted small">Sort by:</span>
+          <select [(ngModel)]="sortBy" class="sort-select">
+            <option value="popular">Most Popular</option>
+            <option value="rating">Highest Rated</option>
+            <option value="price-low">Price: Low to High</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Course Grid -->
+      @if (filteredCourses.length === 0) {
+        <div class="empty-state text-center py-5">
+          <i class="bi bi-journal-x fs-1 text-primary mb-2 d-block"></i>
+          <h3 class="h5 fw-bold text-dark">No matching courses found</h3>
+          <p class="text-muted small mb-3">Try clearing your search filters or selecting another category.</p>
+          <button type="button" class="btn btn-primary btn-sm px-4" (click)="resetFilters()">
+            Reset Filters
+          </button>
+        </div>
+      } @else {
+        <div class="row g-4">
+          @for (course of filteredCourses; track course.id) {
+            <div class="col-md-6">
+              <div class="catalog-card h-100 d-flex flex-column">
+                <div class="catalog-thumb-wrap">
+                  <img [src]="course.thumbnail" [alt]="course.title" class="catalog-thumb" />
+                  <span class="catalog-badge">{{ course.badge }}</span>
+                  <span class="catalog-level">{{ course.level }}</span>
+                </div>
+
+                <div class="catalog-card-body d-flex flex-column flex-grow-1 p-4">
+                  <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="cat-tag">{{ course.category }}</span>
+                    <div class="small">
+                      <i class="bi bi-star-fill text-warning"></i>
+                      <strong class="ms-1 text-dark">{{ course.rating }}</strong>
+                      <span class="text-muted">({{ course.reviews }})</span>
+                    </div>
+                  </div>
+
+                  <h3 class="catalog-card-title mb-1">
+                    <a [routerLink]="['/courses', course.id]">{{ course.title }}</a>
+                  </h3>
+                  <p class="text-muted small mb-3">{{ course.subtitle }}</p>
+
+                  <!-- Instructor -->
+                  <a [routerLink]="['/instructors', course.instructor.id]" class="d-flex align-items-center gap-2 text-decoration-none mb-3">
+                    <img [src]="course.instructor.avatar" [alt]="course.instructor.name" class="inst-avatar" />
+                    <span class="text-dark small fw-semibold">{{ course.instructor.name }}</span>
+                  </a>
+
+                  <!-- Meta -->
+                  <div class="d-flex align-items-center gap-3 text-muted small mt-auto pt-3 border-top">
+                    <span><i class="bi bi-clock text-primary me-1"></i>{{ course.duration }}</span>
+                    <span><i class="bi bi-collection-play text-primary me-1"></i>{{ course.lessons }} lessons</span>
+                  </div>
+
+                  <!-- Price & Action -->
+                  <div class="d-flex justify-content-between align-items-center mt-3 pt-2">
+                    <div>
+                      @if (course.isFree) {
+                        <span class="price-current text-success">Free</span>
+                      } @else {
+                        <span class="price-current">${{ course.price }}</span>
+                      }
+                      <span class="price-old ms-2">${{ course.originalPrice }}</span>
+                    </div>
+
+                    <a [routerLink]="['/courses', course.id]" class="btn-enroll">
+                      View Course <i class="bi bi-arrow-right ms-1"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      }
+    </div>
+
+  </div>
+</div>

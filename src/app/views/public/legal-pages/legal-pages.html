@@ -1,1 +1,58 @@
-<p>legal-pages works!</p>
+<div class="legal-page">
+
+  <section class="legal-hero mb-4">
+    <h1 class="h3 fw-bold mb-1">Terms, Privacy &amp; Ecosystem Policies</h1>
+    <p class="text-white-50 small mb-0">Last updated: October 2026 • Applicable to Learners, Instructors &amp; Organizations</p>
+  </section>
+
+  <div class="row g-4">
+    <div class="col-md-3">
+      <div class="legal-nav d-flex flex-column gap-2">
+        <button type="button" class="legal-tab" [class.active]="activeDoc === 'terms'" (click)="activeDoc = 'terms'">
+          Terms of Service
+        </button>
+        <button type="button" class="legal-tab" [class.active]="activeDoc === 'privacy'" (click)="activeDoc = 'privacy'">
+          Privacy Policy
+        </button>
+        <button type="button" class="legal-tab" [class.active]="activeDoc === 'refund'" (click)="activeDoc = 'refund'">
+          Refund &amp; Payout Policy
+        </button>
+      </div>
+    </div>
+
+    <div class="col-md-9">
+      <div class="legal-content-card">
+        @if (activeDoc === 'terms') {
+          <h2 class="h5 fw-bold text-dark mb-3">1. CourseHub Ecosystem Terms of Service</h2>
+          <p class="text-muted small lh-lg">
+            Welcome to CourseHub. By creating an account as a Learner, Instructor, or Organization Administrator, you
+            agree to abide by our academic integrity, intellectual property, and platform governance standards.
+          </p>
+          <h3 class="h6 fw-bold text-dark mt-4 mb-2">2. License to Learners &amp; Content Ownership</h3>
+          <p class="text-muted small lh-lg mb-0">
+            Instructors retain full copyright ownership of the educational content they upload while granting CourseHub
+            a license to deliver streaming lectures and verifiable certificates to enrolled learners.
+          </p>
+        }
+
+        @if (activeDoc === 'privacy') {
+          <h2 class="h5 fw-bold text-dark mb-3">Privacy &amp; Data Protection Policy</h2>
+          <p class="text-muted small lh-lg mb-0">
+            We encrypt all personal data, learning progress metrics, and payment credentials in accordance with GDPR
+            and global data protection standards. We never sell learner or instructor personal data to third parties.
+          </p>
+        }
+
+        @if (activeDoc === 'refund') {
+          <h2 class="h5 fw-bold text-dark mb-3">30-Day Learner Refund &amp; Instructor Payout Policy</h2>
+          <p class="text-muted small lh-lg mb-0">
+            Individual course purchases are eligible for a full refund within 30 days of purchase if less than 35% of
+            the course content has been consumed. Instructor revenue share payouts are settled monthly after the refund
+            window clears.
+          </p>
+        }
+      </div>
+    </div>
+  </div>
+
+</div>
