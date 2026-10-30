@@ -1,1 +1,296 @@
-<p>dashboard-page works!</p>
+<div class="dashboard-container container-fluid py-2">
+  <!-- TOP ROLE SWITCHER HERO BANNER -->
+  <div class="role-hero-card mb-4">
+    <div class="row align-items-center g-3">
+      <div class="col-lg-7">
+        <div class="d-flex align-items-center gap-2 mb-2">
+          <span class="role-badge">
+            <i class="bi"
+              [ngClass]="{
+                'bi-shield-lock-fill': activeRole === UserRole.Admin,
+                'bi-easel2-fill': activeRole === UserRole.Instructor,
+                'bi-mortarboard-fill': activeRole === UserRole.Learner
+              }"></i>
+            {{ activeRole | uppercase }} WORKSPACE
+          </span>
+          <span class="text-white-50 small">• Course-Hub Learning Ecosystem</span>
+        </div>
+        <h2 class="fw-bold text-white mb-1">
+          @if (activeRole === UserRole.Admin) {
+            Platform Administration & Governance Center
+          } @else if (activeRole === UserRole.Instructor) {
+            Instructor Studio & Course Analytics Hub
+          } @else {
+            Welcome back to your Learning Dashboard
+          }
+        </h2>
+        <p class="text-white-50 mb-0">
+          Switch between Admin, Instructor, and Learner roles below to preview role-specific dashboards and sidebar navigation links.
+        </p>
+      </div>
+
+      <!-- 3 ROLE SWITCHER BUTTONS: ADMIN, INSTRUCTOR, LEARNER -->
+      <div class="col-lg-5 d-flex justify-content-lg-end">
+        <div class="role-switcher-group" role="group" aria-label="Switch Dashboard Role">
+          <button
+            type="button"
+            class="role-switch-btn"
+            [class.active]="activeRole === UserRole.Admin"
+            (click)="switchRole(UserRole.Admin)">
+            <i class="bi bi-shield-lock-fill"></i>
+            <span>Admin</span>
+          </button>
+          <button
+            type="button"
+            class="role-switch-btn"
+            [class.active]="activeRole === UserRole.Instructor"
+            (click)="switchRole(UserRole.Instructor)">
+            <i class="bi bi-easel2-fill"></i>
+            <span>Instructor</span>
+          </button>
+          <button
+            type="button"
+            class="role-switch-btn"
+            [class.active]="activeRole === UserRole.Learner"
+            (click)="switchRole(UserRole.Learner)">
+            <i class="bi bi-mortarboard-fill"></i>
+            <span>Learner</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROLE NAVIGATION QUICK-ACCESS LINKS -->
+  <div class="card border-0 shadow-sm rounded-4 mb-4">
+    <div class="card-body p-4">
+      <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
+        <div>
+          <h6 class="fw-bold text-uppercase text-primary mb-1 small letter-spacing-1">
+            <i class="bi bi-compass-fill me-1"></i>
+            Active Sidebar & Route Directory ({{ activeRole | titlecase }})
+          </h6>
+          <p class="text-muted small mb-0">
+            Click any module below or in the left sidebar to navigate directly to that {{ activeRole }} page.
+          </p>
+        </div>
+        <span class="badge bg-primary-subtle text-primary rounded-pill px-3 py-2 fw-semibold">
+          {{ roleLinks.length }} Available Routes
+        </span>
+      </div>
+
+      <div class="row g-3">
+        @for (link of roleLinks; track link.path) {
+          <div class="col-6 col-sm-4 col-md-3 col-xl-2">
+            <a [routerLink]="link.path" class="quick-link-tile text-decoration-none">
+              <div class="quick-link-icon">
+                <i [class]="link.icon"></i>
+              </div>
+              <span class="quick-link-label">{{ link.label }}</span>
+              <span class="quick-link-path">{{ link.path }}</span>
+            </a>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       1. LEARNER DASHBOARD VIEW
+  ========================================================= -->
+  @if (activeRole === UserRole.Learner) {
+    <div class="row g-3 mb-4">
+      @for (stat of learnerStats; track stat.label) {
+        <div class="col-sm-6 col-xl-3">
+          <div class="stat-card h-100">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+              <div class="stat-icon-box">
+                <i class="bi" [ngClass]="stat.icon"></i>
+              </div>
+              <span class="stat-trend">{{ stat.trend }}</span>
+            </div>
+            <h3 class="stat-value mb-1">{{ stat.value }}</h3>
+            <p class="stat-label mb-0">{{ stat.label }}</p>
+          </div>
+        </div>
+      }
+    </div>
+
+    <div class="card border-0 shadow-sm rounded-4">
+      <div class="card-body p-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 class="fw-bold mb-0">Continue Learning</h5>
+          <a routerLink="/my-learning" class="btn btn-sm btn-outline-primary rounded-pill px-3">
+            View All Courses <i class="bi bi-arrow-right ms-1"></i>
+          </a>
+        </div>
+        <div class="row g-3">
+          @for (course of continueLearning; track course.id) {
+            <div class="col-lg-4">
+              <div class="course-progress-card h-100">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <span class="badge bg-primary-subtle text-primary">{{ course.progress }}% Complete</span>
+                  <span class="text-muted small"><i class="bi bi-clock me-1"></i>{{ course.duration }}</span>
+                </div>
+                <h6 class="fw-bold mb-1">{{ course.title }}</h6>
+                <p class="text-muted small mb-2">Instructor: {{ course.instructor }}</p>
+                <div class="progress mb-3" style="height: 7px;">
+                  <div class="progress-bar bg-primary" role="progressbar" [style.width.%]="course.progress"></div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center pt-2 border-top">
+                  <span class="text-secondary small text-truncate me-2">{{ course.nextLesson }}</span>
+                  <a routerLink="/course-classroom" class="btn btn-sm btn-primary rounded-pill px-3 flex-shrink-0">
+                    Resume
+                  </a>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- =========================================================
+       2. INSTRUCTOR DASHBOARD VIEW
+  ========================================================= -->
+  @if (activeRole === UserRole.Instructor) {
+    <div class="row g-3 mb-4">
+      @for (stat of instructorStats; track stat.label) {
+        <div class="col-sm-6 col-xl-3">
+          <div class="stat-card h-100">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+              <div class="stat-icon-box">
+                <i class="bi" [ngClass]="stat.icon"></i>
+              </div>
+              <span class="stat-trend">{{ stat.trend }}</span>
+            </div>
+            <h3 class="stat-value mb-1">{{ stat.value }}</h3>
+            <p class="stat-label mb-0">{{ stat.label }}</p>
+          </div>
+        </div>
+      }
+    </div>
+
+    <div class="card border-0 shadow-sm rounded-4">
+      <div class="card-body p-4">
+        <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
+          <h5 class="fw-bold mb-0">Top Performing Published Courses</h5>
+          <div class="d-flex gap-2">
+            <a routerLink="/course-builder" class="btn btn-sm btn-primary rounded-pill px-3">
+              <i class="bi bi-plus-lg me-1"></i> Create New Course
+            </a>
+            <a routerLink="/manage-courses" class="btn btn-sm btn-outline-primary rounded-pill px-3">
+              Manage Catalog
+            </a>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table align-middle mb-0">
+            <thead class="table-light">
+              <tr>
+                <th>Course Title</th>
+                <th>Enrolled Learners</th>
+                <th>Rating</th>
+                <th>Monthly Revenue</th>
+                <th>Status</th>
+                <th class="text-end">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (item of instructorCourses; track item.title) {
+                <tr>
+                  <td class="fw-semibold">{{ item.title }}</td>
+                  <td>{{ item.students }}</td>
+                  <td><span class="text-warning fw-bold">★</span> {{ item.rating }}</td>
+                  <td class="fw-semibold text-primary">{{ item.revenue }}</td>
+                  <td><span class="badge bg-success-subtle text-success">{{ item.status }}</span></td>
+                  <td class="text-end">
+                    <a routerLink="/course-analytics" class="btn btn-sm btn-light text-primary">
+                      Analytics <i class="bi bi-bar-chart-line ms-1"></i>
+                    </a>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- =========================================================
+       3. ADMIN DASHBOARD VIEW
+  ========================================================= -->
+  @if (activeRole === UserRole.Admin) {
+    <div class="row g-3 mb-4">
+      @for (stat of adminStats; track stat.label) {
+        <div class="col-sm-6 col-xl-3">
+          <div class="stat-card h-100">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+              <div class="stat-icon-box">
+                <i class="bi" [ngClass]="stat.icon"></i>
+              </div>
+              <span class="stat-trend">{{ stat.trend }}</span>
+            </div>
+            <h3 class="stat-value mb-1">{{ stat.value }}</h3>
+            <p class="stat-label mb-0">{{ stat.label }}</p>
+          </div>
+        </div>
+      }
+    </div>
+
+    <div class="card border-0 shadow-sm rounded-4">
+      <div class="card-body p-4">
+        <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
+          <h5 class="fw-bold mb-0">Course Quality Assurance & Approval Queue</h5>
+          <div class="d-flex gap-2">
+            <a routerLink="/user-management" class="btn btn-sm btn-outline-primary rounded-pill px-3">
+              User Directory
+            </a>
+            <a routerLink="/course-management-analytics" class="btn btn-sm btn-primary rounded-pill px-3">
+              Course Governance
+            </a>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table align-middle mb-0">
+            <thead class="table-light">
+              <tr>
+                <th>Course Submission</th>
+                <th>Instructor</th>
+                <th>Category</th>
+                <th>Submitted</th>
+                <th>Review Status</th>
+                <th class="text-end">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (row of adminQueue; track row.course) {
+                <tr>
+                  <td class="fw-semibold">{{ row.course }}</td>
+                  <td>{{ row.instructor }}</td>
+                  <td><span class="badge bg-primary-subtle text-primary">{{ row.category }}</span></td>
+                  <td class="text-muted small">{{ row.submitted }}</td>
+                  <td>
+                    <span class="badge"
+                      [ngClass]="row.status === 'Approved' ? 'bg-success-subtle text-success' : 'bg-warning-subtle text-warning-emphasis'">
+                      {{ row.status }}
+                    </span>
+                  </td>
+                  <td class="text-end">
+                    <a routerLink="/course-management-analytics" class="btn btn-sm btn-light text-primary">
+                      Inspect
+                    </a>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  }
+</div>

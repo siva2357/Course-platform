@@ -1,0 +1,14 @@
+/* =========================================================
+   ADMIN LAYOUT WRAPPER - COURSE HUB BLUE THEME
+========================================================= */
+
+.admin-layout {
+  font-family: 'Inter', 'Outfit', sans-serif;
+  background-color: #f8fafc;
+  min-height: 100vh;
+}
+
+.admin-main {
+  background: radial-gradient(circle at 10% 10%, #eff6ff 0%, #f8fafc 60%, #f0f9ff 100%);
+  scroll-behavior: smooth;
+}
